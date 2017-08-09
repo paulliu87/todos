@@ -1,0 +1,32 @@
+<h1>New Todo</h1>
+
+<%= form_for :todo do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :starts_at %><br>
+    <%= f.date_select :starts_at %>
+  </p>
+
+  <p>
+    <%= f.label :starts_at %><br>
+    <%= f.time_select :starts_at, :ignore_date => true %>
+  </p>
+
+  <p>
+    <%= f.label :complete %><br>
+    <%= f.check_box :completed %>
+  </p>
+
+  <p>
+    <%= f.label :detail %><br>
+    <%= f.text_area :detail %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
