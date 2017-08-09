@@ -73,11 +73,17 @@ RSpec.describe TodosController, type: :controller do
             end
         end
     end
-    describe "DELETE #delete" do
+    describe "DELETE #destory" do
+        before :each do
+            @todo = Todo.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+        end
         it 'removes the todo from users list' do
-            todo = Todo.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
-            delete :delete, params: {user_id: @user.id, id:todo.id}
-            expect(Todo.find_by_id(todo.id)).to equal(nil)
+            delete :destory, params: {user_id: @user.id, id: @todo.id}
+            expect(Todo.find_by_id(@todo.id)).to equal(nil)
+        end
+
+        it 'changes the count of total todos' do
+            expect {delete :destory, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.count}.by(1)
         end
     end
 end

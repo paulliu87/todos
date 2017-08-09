@@ -18,6 +18,10 @@ class TodosController < ApplicationController
             render 'new'
         end
     end
+
+    def destory
+        Todo.find_by_id(params[:id]).destory
+    end
     private
         def todo_params
             params.require(:todo).permit(:title, :deadline, :completed, :detail)
