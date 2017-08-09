@@ -4,12 +4,12 @@
 <%= form_tag new_user_path do %>
     <div>
         <%= label_tag :username %><br />
-        <%= text_field_tag :username, params[:username] %>
+        <%= text_field_tag :username %>
     </div>
 
     <div>
         <%= label_tag :password %><br />
-        <%=text_field_tag :password, params[:password]%>
+        <%=text_field_tag :password %>
     </div>
     <div>
         <%= submit_tag "Sign Up" %>
