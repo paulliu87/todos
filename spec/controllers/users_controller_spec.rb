@@ -13,10 +13,11 @@ RSpec.describe UsersController, type: :controller do
         end
     end
 
-    describe 'create' do
+    describe 'POST #create' do
         before do
-            @user = User.new
+            @user = User.new(username: "tom", password: "123", password_confirmation: "123")
         end
+
         it 'redirect to todos view page' do
             expect(response).to redirect_to("/users/#{@user.id}/todos")
         end
