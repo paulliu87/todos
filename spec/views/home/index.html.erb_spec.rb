@@ -5,7 +5,7 @@ RSpec.describe "home/index.html.erb", type: :view do
       it 'displays a sign up form' do
           render
           rendered.should match('Sign Up')
-          rendered.should match('Login')
+          rendered.should match('Log In')
       end
   end
 end

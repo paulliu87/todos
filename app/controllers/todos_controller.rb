@@ -19,9 +19,11 @@ class TodosController < ApplicationController
         end
     end
 
-    def destory
-        Todo.find_by_id(params[:id]).destory
+    def destroy
+        Todo.find_by_id(params[:id]).destroy
+        redirect_to "/users/#{params[:user_id]}/todos"
     end
+
     private
         def todo_params
             params.require(:todo).permit(:title, :deadline, :completed, :detail)

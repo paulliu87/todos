@@ -62,14 +62,14 @@ RSpec.describe TodosController, type: :controller do
         end
 
         context "with invalid attributes" do
-            it "does not save the new contact in the database" do
+            it "does not save the new todo task in the database" do
                 expect{
                     post :create, params: {user_id: @user.id, todo: {deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List"}}
-                }.to_not change(Todo,:count)
+                }.to_not change{Todo.count}
             end
             it "re-renders the :new template" do
                 post :create, params: {user_id: @user.id, todo: {deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List"}}
-                response.should render_template :new
+                expect(response).should render_template :new
             end
         end
     end
@@ -78,12 +78,12 @@ RSpec.describe TodosController, type: :controller do
             @todo = Todo.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
         end
         it 'removes the todo from users list' do
-            delete :destory, params: {user_id: @user.id, id: @todo.id}
+            delete :destroy, params: {user_id: @user.id, id: @todo.id}
             expect(Todo.find_by_id(@todo.id)).to equal(nil)
         end
 
         it 'changes the count of total todos' do
-            expect {delete :destory, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.count}.by(1)
+            expect {delete :destroy, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.count}.by(-1)
         end
     end
 end

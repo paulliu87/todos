@@ -14,12 +14,28 @@ RSpec.describe UsersController, type: :controller do
     end
 
     describe 'POST #create' do
-        before do
-            @user = User.new(username: "tom", password: "123", password_confirmation: "123")
+        context "with valid attributes" do
+            it "saves a new user in the database" do
+                expect{
+                    post :create, params: {user: {username: "Tom", password: "123", password_confirmation: "123"}}
+                }.to change{User.count}.by(1)
+            end
+            it "redirects to the user list page page" do
+                post :create, params: {user: {username: "Tom", password: "123", password_confirmation: "123"}}
+                expect(response).should redirect_to "/users/#{session[:user_id]}/todos"
+            end
         end
 
-        it 'redirect to todos view page' do
-            expect(response).to redirect_to("/users/#{@user.id}/todos")
+        context "with invalid attributes" do
+            it "does not save a new user in the database" do
+                expect{
+                    post :create, params: {user: {username: "Tom", password: "123", password_confirmation: "456"}}
+                }.to_not change{User.count}
+            end
+            it "re-renders the :new template" do
+                post :create, params: {user: {username: "Tom", password: "123", password_confirmation: "456"}}
+                expect(response).should render_template :new
+            end
         end
     end
 end
