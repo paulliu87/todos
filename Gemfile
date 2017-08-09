@@ -41,6 +41,7 @@ group :development, :test do
   # use rspec to do the unit tests
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'rails-controller-testing'
 end
 
 group :development do
