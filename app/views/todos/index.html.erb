@@ -1,8 +1,9 @@
 <h1>Todo List</h1>
+<a href="/users/<%= params[:user_id] %>/todos/new">Add todo</a>
 <% if @todos != nil %>
-    <% for @todos do |todo| %>
-        <p>
-            todo.title
-        </p>
+    <% @todos.each do |todo| %>
+        <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>">
+            <%= todo.title %>
+        </a>
     <% end %>
 <% end %>

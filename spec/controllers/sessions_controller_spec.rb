@@ -18,23 +18,24 @@ RSpec.describe SessionsController, type: :controller do
             @user = User.create(username: "Tom", password: "123", password_confirmation: "123")
         end
 
-        it 'redirect to todos view page' do
-            post :create, session: {username: "Tom", password: "123"}
+        it 'redirect to todos index page' do
+            post :create, params: {username: "Tom", password: "123"}
             expect(response).to redirect_to("/users/#{@user.id}/todos")
         end
 
         it 'registes a user_id in session' do
-            post :create, session: {username: "Tom", password: "123"}
+            post :create, params: {username: "Tom", password: "123"}
             expect(session[:user_id]).to equal(@user.id)
         end
     end
 
-    describe "DELETE #delete" do
+    describe "DELETE #destroy" do
         before :each do
             session[:user_id] = 1
         end
 
         it 'removes the user_id from session' do
+            delete :destroy
             expect(session[:user_id]).to equal(nil)
         end
     end

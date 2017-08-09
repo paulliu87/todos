@@ -1,12 +1,12 @@
 class TodosController < ApplicationController
     def index
-        @todos = Todo.find_all
+        @todos = Todo.all
     end
     def show
         @todo = Todo.find_by_id(params[:id])
     end
     def new
-        render "new"
+        @todo = Todo.new
     end
 
     def create
@@ -18,4 +18,8 @@ class TodosController < ApplicationController
             render 'new'
         end
     end
+    private
+        def todo_params
+            params.require(:todo).permit(:title, :deadline, :completed, :detail)
+        end
 end
