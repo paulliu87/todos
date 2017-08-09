@@ -1,2 +1,17 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Landing page</h1>
+
+<h2>Sign Up</h2>
+<%= form_tag new_user_path do %>
+    <div>
+        <%= label_tag :username %><br />
+        <%= text_field_tag :username, params[:username] %>
+    </div>
+
+    <div>
+        <%= label_tag :password %><br />
+        <%=text_field_tag :password, params[:password]%>
+    </div>
+    <div>
+        <%= submit_tag "Sign Up" %>
+    </div>
+<% end %>

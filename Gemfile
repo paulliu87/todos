@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # use rspec to do the unit tests
   gem 'rspec-rails'
+  gem 'capybara'
 end
 
 group :development do
