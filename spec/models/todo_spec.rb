@@ -1,8 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Todo, type: :model do
+    let(:user) {
+        User.create(
+            username: "John",
+            password: "123",
+            password_confirmation: "123"
+        )
+    }
     let(:valid_todo) {
-        Todo.new(
+        user.todos.new(
           title: "complete take home project",
           deadline: DateTime.new(2012, 8, 29, 12, 34, 56),
           completed: false,
@@ -10,7 +17,7 @@ RSpec.describe Todo, type: :model do
         )
     }
     let(:unvalid_todo) {
-        Todo.new(
+        user.todos.new(
             deadline: DateTime.new(2012, 8, 29, 12, 34, 56),
             completed: false,
             detail: "Making a Todo List"

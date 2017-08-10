@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
     def index
-        @todos = Todo.is_overdued
+        @todos = Todo.check_overdued(params[:user_id])
     end
     def show
         @todo = Todo.find_by_id(params[:id])
@@ -10,7 +10,7 @@ class TodosController < ApplicationController
     end
 
     def create
-        @todo = Todo.new(todo_params)
+        @todo = User.find(params[:user_id]).todos.new(todo_params)
 
         if @todo.save
             redirect_to "/users/#{params[:user_id]}/todos"

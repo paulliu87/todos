@@ -29,7 +29,7 @@ RSpec.describe TodosController, type: :controller do
     end
     describe "GET #show" do
         before :each do
-            @todo = Todo.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+            @todo = @user.todos.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
         end
         it "displays a specific todo task" do
             get :show, params: {user_id: @user.id, id: @todo.id}
@@ -75,7 +75,7 @@ RSpec.describe TodosController, type: :controller do
     end
     describe "DELETE #destory" do
         before :each do
-            @todo = Todo.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+            @todo = @user.todos.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
         end
         it 'removes the todo from users list' do
             delete :destroy, params: {user_id: @user.id, id: @todo.id}
@@ -89,7 +89,7 @@ RSpec.describe TodosController, type: :controller do
 
     describe "UPDATE #iscompleted" do
         before :each do
-            @todo = Todo.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+            @todo = @user.todos.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
         end
 
         it "marks a todo task as completed" do
