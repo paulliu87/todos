@@ -169,6 +169,8 @@ bundle exec rspec spec/controllers/users_controller_spec.rb:50
 
 ## Deployment
 
+https://thawing-chamber-42985.herokuapp.com/
+
 I deployed this project to heroku since it is free.
 
 Simply run
