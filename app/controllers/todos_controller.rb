@@ -1,4 +1,5 @@
 class TodosController < ApplicationController
+    before_filter :authorize
     def index
         @todos = Todo.check_overdued(params[:user_id])
     end
