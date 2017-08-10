@@ -88,6 +88,23 @@ I made sure all tests passed.
 
 Last step: deploy.
 
+## Time Management
+
+Since I expect to make this project under 10 hours, I decided to time box my tasks:
+
+Design, setup Trello board and development environment: 1hr
+User login, register and logout: 2hr
+Display todos: 1hr
+View todo: 1hr
+Add todo: 1hr
+Delete todo: 1hr
+Mark as completed: 1hr
+High Light: 1hr
+Styling: 1hr
+Edit README: 1hr
+
+I used Trello Board to keep my task on track.
+
 ### Gems
 
 
@@ -171,11 +188,14 @@ Open the app
 heroku open
 ```
 
-## Built With
+## Support Documents
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Rails Doc.](http://guides.rubyonrails.org/getting_started.html) - Ruby on Rails
+* [Stack Overflow](https://stackoverflow.com/) - Very Helpful answers
+* [Relish](https://relishapp.com/rspec) - RSpec Relish
+* [Heroku](https://devcenter.heroku.com/articles/git) - Heroku deployment
+* [Trello](https://trello.com/b/nXlFFEu0/todo-list) - Project Management Tool
+
 
 ## Version Control
 
