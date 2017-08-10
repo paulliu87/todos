@@ -1,98 +1,116 @@
+
 <h1>TODOs</h1>
 
-A Web App To-Do List. The project goals are:
+<div class="col-md-8">
+    <h3>A Web App To-Do List. The project goals are:</h3>
+    <ul>As a user, I can add a TODO to the list.</ul>
+    <ul>As a user, I can see all the TODOs on the list in an overview.</ul>
+    <ul>As a user, I can drill into a TODO to see more information about the TODO.</ul>
+    <ul>As a user, I can delete a TODO.</ul>
+    <ul>As a user, I can mark a TODO as completed.</ul>
+    <ul>As a user, when I see all the TODOs in the overview, if today's date is past the TODO's deadline, highlight it.</ul>
+</div><br />
 
-As a user, I can add a TODO to the list.
-As a user, I can see all the TODOs on the list in an overview.
-As a user, I can drill into a TODO to see more information about the TODO.
-As a user, I can delete a TODO.
-As a user, I can mark a TODO as completed.
-As a user, when I see all the TODOs in the overview, if today's date is past the TODO's deadline, highlight it.
-Getting Started
 
-Followed the MVC design pattern hardly to perform a solid design process.
-Used TDD for development.
-First I am looking at the scenario. The first step: Enumerate. I listed all possible features:
+<div class="col-md-8">
+    <h3>Getting Started</h3>
+    <p>
+        Followed the <kbd>MVC</kbd> design pattern hardly to perform a solid design process.
+    </p>
+    <p>
+        Used <kbd>TDD</kbd> for development.
+    </p>
+    <p>
+        First I am looking at the <kbd>scenario</kbd>. The first step: <kbd>Enumerate</kbd>. I listed all possible features:
+    </p>
 
-Add todo
-Display todos
-View certain todo
-Delete todo
-Mark a todo as completed
-Hight light the passed todo task
-Search a todo
-Show todos based on their deadline
-Show unfinished todos in separate column
-User can login/register
-Coming up todos
-Now, second steps: Sort. I want to make the MVP, so I need to make sure it has all the required feature before I add more to it.
+    <ul>Add todo</ul>
+    <ul>Display todos</ul>
+    <ul>View certain todo</ul>
+    <ul>Delete todo</ul>
+    <ul>Mark a todo as completed</ul>
+    <ul>Hight light the passed todo task</ul>
+    <ul>Search a todo</ul>
+    <ul>Show todos based on their deadline</ul>
+    <ul>Show unfinished todos in separate column</ul>
+    <ul>User can login/register</ul>
+    <ul>Coming up todos</ul>
 
-User can login/register
-Add todo
-Display todos
-View certain todo
-Delete todo
-Mark a todo as completed
-Hight light the passed todo task
-Next step: Analysis & Predict
+    <p>
+        Now, second steps: <kbd>Sort</kbd>. I want to make the <kbd>MVP</kbd>, so I need to make sure it has all the required feature before I add more to it.
+    </p>
+    <ul>User can login/register</ul>
+    <ul>Add todo</ul>
+    <ul>Display todos</ul>
+    <ul>View certain todo</ul>
+    <ul>Delete todo</ul>
+    <ul>Mark a todo as completed</ul>
+    <ul>Hight light the passed todo task</ul>
+    <ul>Next step: Analysis & Predict</ul>
 
-I need to consider the QPS.The The reasons QPS plays a big role are below:
+    I need to consider the QPS.The The reasons QPS plays a big role are below:
 
-QPS decides that type web server
-QPS decides the relationship between web server and database
-For this practice, I assumed the QPS is under 100. A laptop will handle it all. Since I planned to deploy my project to heroku, I would use a web server. And a web server can handle 1k QPS.
+    QPS decides that type web server
+    QPS decides the relationship between web server and database
+    For this practice, I assumed the QPS is under 100. A laptop will handle it all. Since I planned to deploy my project to heroku, I would use a web server. And a web server can handle 1k QPS.
 
-Since I am really not going use all 1k QPS, a SQL database would be ideal, I chose PostgreSQL.
+    Since I am really not going use all 1k QPS, a SQL database would be ideal, I chose PostgreSQL.
 
-Next step: service. In this case, all I need is the sorted features.
+    Next step: service. In this case, all I need is the sorted features.
 
-Now, I looked at storage.
+    Now, I looked at storage.
 
-I started with todos since it contains most of the features. And I also need users.
+    I started with todos since it contains most of the features. And I also need users.
 
-Now it looks like this:
+    Now it looks like this:
 
-User Service ===> SQL Todo Service ===> SQL
+    User Service ===> SQL Todo Service ===> SQL
 
-Next step: schema.
+    Next step: schema.
 
-User service:
+    User service:
 
-username
-password
-password_confirmation
-Todo service:
+    username
+    password
+    password_confirmation
+    Todo service:
 
-title
-deadline
-completed
-detail
-overdued
-I added a session service to help existed user to login.
+    title
+    deadline
+    completed
+    detail
+    overdued
+    I added a session service to help existed user to login.
 
-Now user story:
+    Now user story:
 
-User == 1. login/register ==> Web Server == 2. Get user information ==> User table User Table == 3 send the information back ==> Web server == 4. get todos ==> Todo table Todo table == 5. feed back todo list ==> Web Server == 6. Display ==> User
+    User == 1. login/register ==> Web Server == 2. Get user information ==> User table User Table == 3 send the information back ==> Web server == 4. get todos ==> Todo table Todo table == 5. feed back todo list ==> Web Server == 6. Display ==> User
 
-Since I have the user story layout, I start to write tests to controller, model and view.
+    Since I have the user story layout, I start to write tests to controller, model and view.
 
-Once I have my expectation setup, I can start code the really controller, model and view to pass all the tests.
+    Once I have my expectation setup, I can start code the really controller, model and view to pass all the tests.
 
-I made sure all tests passed.
+    I made sure all tests passed.
 
-Last step: deploy.
+    Last step: deploy.
+    </p>
+</div>
 
-Time Management
+<div class="col-md-8">
+<h3>Time Management</h3>
 
-Since I expect to make this project under 10 hours, I decided to time box my tasks:
+<p>Since I expect to make this project under 10 hours, I decided to time box my tasks:
 
 Design, setup Trello board and development environment: 1hr User login, register and logout: 2hr Display todos: 1hr View todo: 1hr Add todo: 1hr Delete todo: 1hr Mark as completed: 1hr High Light: 1hr Styling: 1hr Edit README: 1hr
 
 I used Trello Board to keep my task on track.
+</p>
+</div>
+<div class="col-md-8">
+<h3>Gems</h3>
 
-Gems
-
-Use postgresql as the database for Active Record
+<p>
+    Use postgresql as the database for Active Record
 Use bycrypt has_secure_password
 Use RSpec and Capybara to do the testing
 Installing
@@ -117,8 +135,12 @@ rails server
 Now, you can open a chrome and enter localhost:3000 to use the web app
 
 To deploy this project to heroku, make sure you have a heroku account.
+</p>
+</div>
+<div class="col-md-8">
+<h3>Running the tests</h3>
+<p>
 
-Running the tests
 
 There are over 30 RSpec tests for controller, model, and view.
 
@@ -130,8 +152,12 @@ To run the tests for specific controller or for specific unit method, follow the
 bundle exec rspec spec/controllers/users_controller_spec.rb
 
 bundle exec rspec spec/controllers/users_controller_spec.rb:50
-Deployment
+</p>
+</div>
+<div class="col-md-8">
+<h3>Deployment</h3>
 
+<p>
 https://thawing-chamber-42985.herokuapp.com/
 
 I deployed this project to heroku since it is free.
@@ -145,20 +171,36 @@ heroku run rake db:migrate
 Open the app
 
 heroku open
-Support Documents
+
+
+</p>
+</div>
+<div class="col-md-8">
+<h3>Support Documents</h3>
+<p>
+
 
 Rails Doc. - Ruby on Rails
 Stack Overflow - Very Helpful answers
 Relish - RSpec Relish
 Heroku - Heroku deployment
 Trello - Project Management Tool
-Version Control
+</p>
+</div>
+<div class="col-md-8">
+<h3>Version Control</h3>
+<p>
+
 
 Every time, I was working on a new feature. I add a new branch. Once I finish coding, I added and committed the change. Checkouted to master and merge it. Create a new branch and repeat the process.
 
 ! [bootstrap] Add boostrap style ! [changestate] changing state between login ad logout ! [deploy] highlight the todo task is overdued ! [homepage] create a landingpage
 
 [master] make a readme file ! [readme] highlight the todo task is overdued ! [session] add session controller to pass all the tests ! [todos] highlight the todo task is overdued ! [user] init sessions
-Authors
+</p>
+</div>
+<div class="col-md-8">
+<h3>Authors</h3>
 
 Paul Liu - Initial work - todos
+</div>
