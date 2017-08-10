@@ -24,6 +24,12 @@ class TodosController < ApplicationController
         redirect_to "/users/#{params[:user_id]}/todos"
     end
 
+    def update
+        @todo = Todo.find_by_id(params[:id])
+        @todo.update(completed: true)
+        redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}"
+    end
+
     private
         def todo_params
             params.require(:todo).permit(:title, :deadline, :completed, :detail)

@@ -86,4 +86,14 @@ RSpec.describe TodosController, type: :controller do
             expect {delete :destroy, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.count}.by(-1)
         end
     end
+
+    describe "UPDATE #iscompleted" do
+        before :each do
+            @todo = Todo.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+        end
+
+        it "marks a todo task as completed" do
+            expect {put :update, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.find(@todo.id).completed}.from(false).to(true)
+        end
+    end
 end

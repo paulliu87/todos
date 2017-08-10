@@ -12,3 +12,5 @@
 <a href="/users/<%= params[:user_id] %>/todos">Back</a>
 <%= link_to 'Delete', { :controller => 'todos', :action => 'destroy', :id => @todo.id },
                       { :confirm => 'Are you sure?', :method => :delete, :remote => true} %>
+<%= link_to 'Mark as Completed', { :controller => 'todos', :action => 'update', :id => @todo.id },
+                      { :method => :put, :remote => true} %>

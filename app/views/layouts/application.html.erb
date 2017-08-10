@@ -6,9 +6,19 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
+      <header>
+          <% if session[:user_id] %>
+              Logged in as <%= User.find(session[:user_id]).username %>
+              <%= link_to "Log Out", logout_path%>
+          <% else %>
+              <%= link_to "Log In", login_path%>
+              <%= link_to "Sign Up", signup_path %>
+          <% end %>
+      </header>
     <%= yield %>
   </body>
 </html>
