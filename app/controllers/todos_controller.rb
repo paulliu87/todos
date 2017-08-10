@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
     def index
-        @todos = Todo.all
+        @todos = Todo.is_overdued
     end
     def show
         @todo = Todo.find_by_id(params[:id])
@@ -26,7 +26,7 @@ class TodosController < ApplicationController
 
     def update
         @todo = Todo.find_by_id(params[:id])
-        @todo.update(completed: true)
+        @todo.is_completed
         redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}"
     end
 

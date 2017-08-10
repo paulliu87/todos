@@ -4,12 +4,12 @@
     <% @todos.each do |todo| %>
         <div class="row">
             <div class="col-md-6">
-                <% if todo.deadline < DateTime.now %>
-                    <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" class="list-group-item list-group-item-action">
+                <% if todo.overdue %>
+                    <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" class="list-group-item list-group-item-action list-group-item-danger">
                         <%= todo.title %>
                     </a>
                 <% else %>
-                    <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" class="list-group-item list-group-item-action list-group-item-danger">
+                    <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" class="list-group-item list-group-item-action">
                         <%= todo.title %>
                     </a>
                 <% end %>

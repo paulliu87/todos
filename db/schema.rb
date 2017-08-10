@@ -19,9 +19,12 @@ ActiveRecord::Schema.define(version: 20170809190838) do
     t.string   "title"
     t.datetime "deadline"
     t.boolean  "completed"
+    t.boolean  "overdue"
     t.string   "detail"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_todos_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,4 +34,5 @@ ActiveRecord::Schema.define(version: 20170809190838) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "todos", "users"
 end
