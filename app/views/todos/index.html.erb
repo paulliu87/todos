@@ -1,9 +1,26 @@
-<h1>Todo List</h1>
-<a href="/users/<%= params[:user_id] %>/todos/new">Add todo</a>
+<h1>TODOs</h1>
+
 <% if @todos != nil %>
     <% @todos.each do |todo| %>
-        <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>">
-            <%= todo.title %>
-        </a>
+        <div class="row">
+            <div class="col-md-6">
+                <% if todo.deadline < DateTime.now %>
+                    <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" class="list-group-item list-group-item-action">
+                        <%= todo.title %>
+                    </a>
+                <% else %>
+                    <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" class="list-group-item list-group-item-action list-group-item-danger">
+                        <%= todo.title %>
+                    </a>
+                <% end %>
+            </div>
+            <div class="col-md-1 col-md-offset-1">
+                <%= link_to 'Delete', { :controller => 'todos', :action => 'destroy', :id => todo.id},
+                                      { :method => :delete, :remote => true, :class => "list-group-item list-group-item-action" } %>
+            </div>
+            <div class="col-md-2">
+                <%= link_to 'Mark Completed', { :controller => 'todos', :action => 'update', :id => todo.id }, { :method => :put, :remote => true, :class => "list-group-item list-group-item-action"} %>
+            </div>
+        </div>
     <% end %>
 <% end %>
