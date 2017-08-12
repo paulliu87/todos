@@ -291,19 +291,19 @@ heroku open
 
 ## Version Control
 
-Every time, I was working on a new feature. I add a new branch.
+Every time, I was working on a new feature, I add a new branch.
 Once I finish coding, I added and committed the change. Checkouted to master and merge it.
 Create a new branch and repeat the process.
 
-! [bootstrap] Add boostrap style
-! [changestate] changing state between login ad logout
-! [deploy] highlight the todo task is overdued
-! [homepage] create a landingpage
-* [master] make a readme file
-! [readme] highlight the todo task is overdued
-! [session] add session controller to pass all the tests
-! [todos] highlight the todo task is overdued
-! [user] init sessions
+* ! [bootstrap] Add boostrap style
+* ! [changestate] changing state between login ad logout
+* ! [deploy] highlight the todo task is overdued
+* ! [homepage] create a landingpage
+* * [master] make a readme file
+* ! [readme] highlight the todo task is overdued
+* ! [session] add session controller to pass all the tests
+* ! [todos] highlight the todo task is overdued
+* ! [user] init sessions
 
 ## Authors
 
