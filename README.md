@@ -37,6 +37,8 @@ Now, second steps: Sort. I want to make the MVP, so I need to make sure it has a
 * Mark a todo as completed
 * Hight light the passed todo task
 
+Time to do some drawing, I made some mockups for myself to better assess the visual hierarchy between elements.
+
 Next step: Analysis & Predict
 
 I need to consider the QPS.The The reasons QPS plays a big role are below:
