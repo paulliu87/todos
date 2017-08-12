@@ -105,6 +105,77 @@ Edit README: 1hr
 
 I used Trello Board to keep my task on track.
 
+### Prerequisites
+
+* Ruby on Rails
+* PostgreSQL
+* Homebrew
+* rbenv
+
+Installing Homebrew, simply open Terminal and run the following command
+
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+Installing rbenv, which is the ruby version management tool. Follow closely with the installation instruction from:
+
+https://github.com/rbenv/rbenv
+
+
+Installing Ruby on Rails, choose the version of ruby you want to install. (2.4.0 recommended). To do this, run the following commands in your Terminal:
+
+```
+brew install rbenv ruby-build
+
+# Add rbenv to bash so that it loads every time you open a terminal
+echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
+source ~/.bash_profile
+
+# Install Ruby
+rbenv install 2.4.0
+rbenv global 2.4.0
+ruby -v
+```
+
+Installing Rails (5.1.1 Recommend)
+
+Installing Rails is as simple as running the following command in your Terminal:
+
+```
+gem install rails -v 5.1.1
+```
+
+Rails is now installed, but in order for us to use the rails executable, we need to tell rbenv to see it:
+
+```
+rbenv rehash
+```
+
+And now we can verify Rails is installed:
+
+```
+rails -v
+# Rails 5.1.1
+```
+
+Now, setup PostgreSQL
+
+Run this command in the terminal:
+
+```
+brew install postgresql
+```
+
+Once this command is finished, it gives you a couple commands to run. Follow the instructions and run them:
+
+```
+# To have launchd start postgresql at login:
+ln -sfv /usr/local/opt/postgresql/*plist ~/Library/LaunchAgents
+
+# Then to load postgresql now:
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+```
+
 ### Gems
 
 
@@ -132,6 +203,25 @@ Install gems
 
 ```
 bundle install
+```
+
+Make sure the PostgreSQL is running, simply run
+
+```
+ps auxwww | grep postgres
+```
+
+If something like
+
+```
+/Library/PostgreSQL/8.3/bin/postgres -D /Library/PostgreSQL/8.3/data
+
+```
+
+The PostgreSQL is running properly, otherwise run the following cmd to restart the PostgreSQL.
+
+```
+brew services restart postgresql
 ```
 
 Migrate the database
