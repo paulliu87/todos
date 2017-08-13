@@ -3,129 +3,148 @@
 
 <div class="col-md-8">
     <h3>A Web App To-Do List. The project goals are:</h3>
-    <ul>As a user, I can add a TODO to the list.</ul>
-    <ul>As a user, I can see all the TODOs on the list in an overview.</ul>
-    <ul>As a user, I can drill into a TODO to see more information about the TODO.</ul>
-    <ul>As a user, I can delete a TODO.</ul>
-    <ul>As a user, I can mark a TODO as completed.</ul>
-    <ul>As a user, when I see all the TODOs in the overview, if today's date is past the TODO's deadline, highlight it.</ul>
+    <hr>
+    <ul>
+      <li>As a user, I can add a TODO to the list.</li>
+      <li>As a user, I can see all the TODOs on the list in an overview.</li>
+      <li>As a user, I can drill into a TODO to see more information about the TODO.</li>
+      <li>As a user, I can delete a TODO.</li>
+      <li>As a user, I can mark a TODO as completed.</li>
+      <li>As a user, when I see all the TODOs in the overview, if today's date is past the TODO's deadline, highlight it.</li>
+    </ul>
 </div><br />
-
 
 <div class="col-md-8">
     <h3>Getting Started</h3>
+    <hr>
     <p>
-        Followed the <kbd>MVC</kbd> design pattern hardly to perform a solid design process.
+        Followed the <kbd>MVC</kbd> design pattern hardly to perform a solid design process. Used <kbd>TDD</kbd> for development.
+        First I am looking at the <kbd>scenario</kbd>.
     </p>
     <p>
-        Used <kbd>TDD</kbd> for development.
+        The first step: <kbd>Enumerate</kbd>. (I listed all possible features.)
     </p>
-    <p>
-        First I am looking at the <kbd>scenario</kbd>. The first step: <kbd>Enumerate</kbd>. I listed all possible features:
-    </p>
-
-    <ul>Add todo</ul>
-    <ul>Display todos</ul>
-    <ul>View certain todo</ul>
-    <ul>Delete todo</ul>
-    <ul>Mark a todo as completed</ul>
-    <ul>Hight light the passed todo task</ul>
-    <ul>Search a todo</ul>
-    <ul>Show todos based on their deadline</ul>
-    <ul>Show unfinished todos in separate column</ul>
-    <ul>User can login/register</ul>
-    <ul>Coming up todos</ul>
-
+    <ul>
+      <li>Add todo</li>
+      <li>Display todos</li>
+      <li>View certain todo</li>
+      <li>Delete todo</li>
+      <li>Mark a todo as completed</li>
+      <li>Hight light the passed todo task</li>
+      <li>Search a todo</li>
+      <li>Show todos based on their deadline</li>
+      <li>Show unfinished todos in separate column</li>
+      <li>User can login/register</li>
+      <li>Coming up todos</li>
+    </ul>
     <p>
         Now, second steps: <kbd>Sort</kbd>. I want to make the <kbd>MVP</kbd>, so I need to make sure it has all the required feature before I add more to it.
     </p>
-    <ul>User can login/register</ul>
-    <ul>Add todo</ul>
-    <ul>Display todos</ul>
-    <ul>View certain todo</ul>
-    <ul>Delete todo</ul>
-    <ul>Mark a todo as completed</ul>
-    <ul>Hight light the passed todo task</ul>
-    <ul>Next step: Analysis & Predict</ul>
-
-    I need to consider the QPS.The The reasons QPS plays a big role are below:
-
-    QPS decides that type web server
-    QPS decides the relationship between web server and database
-    For this practice, I assumed the QPS is under 100. A laptop will handle it all. Since I planned to deploy my project to heroku, I would use a web server. And a web server can handle 1k QPS.
-
-    Since I am really not going use all 1k QPS, a SQL database would be ideal, I chose PostgreSQL.
-
-    Next step: service. In this case, all I need is the sorted features.
-
-    Now, I looked at storage.
-
-    I started with todos since it contains most of the features. And I also need users.
-
-    Now it looks like this:
-
-    User Service ===> SQL Todo Service ===> SQL
-
-    Next step: schema.
-
-    User service:
-
-    username
-    password
-    password_confirmation
-    Todo service:
-
-    title
-    deadline
-    completed
-    detail
-    overdued
-    I added a session service to help existed user to login.
-
-    Now user story:
-
-    User == 1. login/register ==> Web Server == 2. Get user information ==> User table User Table == 3 send the information back ==> Web server == 4. get todos ==> Todo table Todo table == 5. feed back todo list ==> Web Server == 6. Display ==> User
-
-    Since I have the user story layout, I start to write tests to controller, model and view.
-
-    Once I have my expectation setup, I can start code the really controller, model and view to pass all the tests.
-
-    I made sure all tests passed.
-
-    Last step: deploy.
+    <ul>
+      <li>User can login/register</li>
+      <li>Add todo</li>
+      <li>Display todos</li>
+      <li>View certain todo</li>
+      <li>Delete todo</li>
+      <li>Mark a todo as completed</li>
+      <li>Hight light the passed todo task</li>
+      <li>Next step: Analysis & Predict</li>
+    </ul>
+    <p>
+      I need to consider the QPS.The The reasons QPS plays a big role are below:
     </p>
+    <ul>
+      <li>QPS decides that type web server</li>
+      <li>QPS decides the relationship between web server and database</li>
+    </ul>
+    <p>For this practice, I assumed the QPS is under 100. A laptop will handle it all. Since I planned to deploy my project to heroku, I would use a web server. And a web server can handle 1k QPS.</p>
+    <p>Since I am really not going use all 1k QPS, a SQL database would be ideal, I chose PostgreSQL.</p>
+    <p>Next step: <kbd>service</kbd>. In this case, all I need is the sorted features.</p>
+    <p>Now, I looked at <kbd>storage</kbd>.</p>
+    <br/>
+    <p>I would need to store data for todos and users. Now it looks like this:</p>
+    <ul>
+    <li>User Service ===> SQL</li>
+    <li>Todo Service ===> SQL</li>
+    </ul>
+
+    <p>Next step: <kbd>schema</kbd>.</p>
+    <span class="label label-success">User service:</span>
+    <ul>
+      <li>username</li>
+      <li>password</li>
+      <li>password_confirmation</li>
+    </ul>
+    <span class="label label-success">Todo service:</span>
+    <ul>
+      <li>title</li>
+      <li>deadline</li>
+      <li>completed</li>
+      <li>detail</li>
+      <li>overdued</li>
+      <li>user_id (foreign key)</li>
+    </ul>
+    <p>
+    I added a session service to help existed user to login.</p>
+
+    <p>Now <kbd>user story</kbd>:</p>
+
+    <p ALIGN=CENTER>User == 1. login/register ==> Web Server ==> 2. Get user information ==> User table</p><br>
+    <p ALIGN=CENTER>User Table ==> 3 send the information back ==> Web server ==> 4. get todos ==> Todo table</p><br>
+    <p ALIGN=CENTER>Todo table ==> 5. feed back todo list ==> Web Server ==> 6. Display ==> User</p><br>
+
+    <p>Since I have the user story layout, I start to write tests to controller, model and view.</p>
+
+    <p>Once I have my expectation setup, I can start code the really controller, model and view to pass all the tests.</p><br>
+
+    <p>I made sure all tests passed.</p>
+
+    <p>Last step: deploy.</p>
 </div>
 
 <div class="col-md-8">
 <h3>Time Management</h3>
 
-<p>Since I expect to make this project under 10 hours, I decided to time box my tasks:
+<p>Since I expect to make this project under 10 hours, I decided to time box my tasks:</p>
 
-Design, setup Trello board and development environment: 1hr User login, register and logout: 2hr Display todos: 1hr View todo: 1hr Add todo: 1hr Delete todo: 1hr Mark as completed: 1hr High Light: 1hr Styling: 1hr Edit README: 1hr
-
-I used Trello Board to keep my task on track.
-</p>
+<ul>
+  <li>Design, setup Trello board and development environment: 1hr </li>
+  <li>User login, register and logout: 2hr </li>
+  <li>Display todos: 1hr </li>
+  <li>View todo: 1hr </li>
+  <li>Add todo: 1hr </li>
+  <li>Delete todo: 1hr </li>
+  <li>Mark as completed: 1hr </li>
+  <li>High Light: 1hr </li>
+  <li>Styling: 1hr </li>
+  <li>Edit README: 1hr</li>
+</ul>
+I used <a href="https://trello.com/b/nXlFFEu0/todo-list">Trello Board</a>  to keep my task on track.
 </div>
 <div class="col-md-8">
 <h3>Gems</h3>
+<hr>
+<ul>
+  <li>Use postgresql as the database for Active Record</li>
+  <li>Use bycrypt has_secure_password</li>
+  <li>Use RSpec and Capybara to do the testing</li>
+</ul>
 
-<p>
-    Use postgresql as the database for Active Record
-Use bycrypt has_secure_password
-Use RSpec and Capybara to do the testing
-Installing
+<h3>Installing</h3>
+<hr>
+<p>For online access to the web app, please visit https://thawing-chamber-42985.herokuapp.com/</p><br>
 
-For online access to the web app, please visit https://thawing-chamber-42985.herokuapp.com/
+<p>To run this app on your local machine, navigate to your repository folder and run the following cmd in terminal</p>
 
-To run this app on your local machine, navigate to your repository folder and run the following cmd in terminal
+<code>git clone https://github.com/paulliu87/todos.git</code><br><br>
 
-git clone https://github.com/paulliu87/todos.git
-Once the project is downloaded, run the cmd to access the folder
+<p>Once the project is downloaded, run the cmd to access the folder</p>
 
-cd todos
-Install gems
+<code>cd todos</code><br><br>
 
-bundle install
+<p>Install gems</p>
+
+<code>bundle install</code><br><br>
 Migrate the database
 
 bundle exec rake db:migrate
