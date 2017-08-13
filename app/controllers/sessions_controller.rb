@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             redirect_to "/users/#{user.id}/todos", notice: "Log In"
         else
-            flash.now.alert = "username or password is incorrect"
+            @error = "username or password is incorrect"
             render "new"
         end
     end

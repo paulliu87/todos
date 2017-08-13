@@ -1,32 +1,32 @@
 <h1>New Todo</h1>
 
 <%= form_for :todo, url: user_todos_path do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
+    <p>
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+    </p>
 
-  <p>
-    <%= f.label :starts_at %><br>
-    <%= f.date_select :deadline %>
-  </p>
+    <p>
+        <%= f.label :starts_at %><br>
+        <%= f.date_select :deadline %>
+    </p>
 
-  <p>
-    <%= f.label :starts_at %><br>
-    <%= f.time_select :deadline, :ignore_date => true %>
-  </p>
+    <p>
+        <%= f.label :starts_at %><br>
+        <%= f.time_select :deadline, :ignore_date => true %>
+    </p>
 
-  <p>
-    <%= f.label :complete %><br>
-    <%= f.check_box :completed %>
-  </p>
+    <p>
+        <%= f.label :complete %><br>
+        <%= f.check_box :completed %>
+    </p>
 
-  <p>
-    <%= f.label :detail %><br>
-    <%= f.text_area :detail %>
-  </p>
+    <p>
+        <%= f.label :detail %><br>
+        <%= f.text_area :detail %>
+    </p>
 
-  <p>
-    <%= f.submit %>
-  </p>
+    <p>
+        <%= f.submit %>
+    </p>
 <% end %>

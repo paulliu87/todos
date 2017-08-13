@@ -1,5 +1,9 @@
 <h1>Log In</h1>
-
+<% if @error != nil %>
+    <div class="error_messsages" >
+        <p><%= @error %></p>
+    </div>
+<% end %>
 <%= form_tag sessions_path do %>
     <div>
         <%= label_tag :username %><br />
