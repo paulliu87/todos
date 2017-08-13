@@ -19,7 +19,7 @@
     <hr>
     <p>
         Followed the <kbd>MVC</kbd> design pattern hardly to perform a solid design process. Used <kbd>TDD</kbd> for development.
-        First I am looking at the <kbd>scenario</kbd>.
+        First I was looking at the <kbd>scenario</kbd>.
     </p>
     <p>
         The first step: <kbd>Enumerate</kbd>. (I listed all possible features.)
@@ -30,7 +30,7 @@
       <li>View certain todo</li>
       <li>Delete todo</li>
       <li>Mark a todo as completed</li>
-      <li>Hight light the passed todo task</li>
+      <li>Hightlight the passed todo task</li>
       <li>Search a todo</li>
       <li>Show todos based on their deadline</li>
       <li>Show unfinished todos in separate column</li>
@@ -47,7 +47,7 @@
       <li>View certain todo</li>
       <li>Delete todo</li>
       <li>Mark a todo as completed</li>
-      <li>Hight light the passed todo task</li>
+      <li>Hightlight the passed todo task</li>
       <li>Next step: Analysis & Predict</li>
     </ul>
     <p>
@@ -81,11 +81,11 @@
       <li>deadline</li>
       <li>completed</li>
       <li>detail</li>
-      <li>overdued</li>
+      <li>overdue</li>
       <li>user_id (foreign key)</li>
     </ul>
     <p>
-    I added a session service to help existed user to login.</p>
+    I added a session service to help existing user to login.</p>
 
     <p>Now <kbd>user story</kbd>:</p>
 
@@ -95,131 +95,130 @@
 
     <p>Since I have the user story layout, I start to write tests to controller, model and view.</p>
 
-    <p>Once I have my expectation setup, I can start code the really controller, model and view to pass all the tests.</p><br>
+    <p>Once I have my expectation setup, I can start code the real controller, model and view to pass all the tests.</p><br>
 
     <p>I made sure all tests passed.</p>
 
-    <p>Last step: deploy.</p>
+    <p>Last step: <kbd>deploy</kbd>.</p>
 </div>
 
 <div class="col-md-8">
-<h3>Time Management</h3>
+    <h3>Time Management</h3>
+    <hr>
+    <p>Since I expect to make this project under 10 hours, I decided to time box my tasks:</p>
 
-<p>Since I expect to make this project under 10 hours, I decided to time box my tasks:</p>
-
-<ul>
-  <li>Design, setup Trello board and development environment: 1hr </li>
-  <li>User login, register and logout: 2hr </li>
-  <li>Display todos: 1hr </li>
-  <li>View todo: 1hr </li>
-  <li>Add todo: 1hr </li>
-  <li>Delete todo: 1hr </li>
-  <li>Mark as completed: 1hr </li>
-  <li>High Light: 1hr </li>
-  <li>Styling: 1hr </li>
-  <li>Edit README: 1hr</li>
-</ul>
-I used <a href="https://trello.com/b/nXlFFEu0/todo-list">Trello Board</a>  to keep my task on track.
+    <ul>
+        <li>Design, set up Trello board and development environment: 1hr </li>
+        <li>User login, register and logout: 2hr </li>
+        <li>Display todos: 1hr </li>
+        <li>View todo: 0.5hr </li>
+        <li>Add todo: 1hr </li>
+        <li>Delete todo: 0.5hr </li>
+        <li>Mark as completed: 1hr </li>
+        <li>HighLight: 1hr </li>
+        <li>Styling: 1hr </li>
+        <li>Edit README: 1hr</li>
+    </ul>
+    I used <a href="https://trello.com/b/nXlFFEu0/todo-list">Trello Board</a>  to keep my task on track.
 </div>
 <div class="col-md-8">
-<h3>Gems</h3>
-<hr>
-<ul>
-  <li>Use postgresql as the database for Active Record</li>
-  <li>Use bycrypt has_secure_password</li>
-  <li>Use RSpec and Capybara to do the testing</li>
-</ul>
-
-<h3>Installing</h3>
-<hr>
-<p>For online access to the web app, please visit https://thawing-chamber-42985.herokuapp.com/</p><br>
-
-<p>To run this app on your local machine, navigate to your repository folder and run the following cmd in terminal</p>
-
-<code>git clone https://github.com/paulliu87/todos.git</code><br><br>
-
-<p>Once the project is downloaded, run the cmd to access the folder</p>
-
-<code>cd todos</code><br><br>
-
-<p>Install gems</p>
-
-<code>bundle install</code><br><br>
-Migrate the database
-
-bundle exec rake db:migrate
-Start the server
-
-rails server
-Now, you can open a chrome and enter localhost:3000 to use the web app
-
-To deploy this project to heroku, make sure you have a heroku account.
-</p>
+  <h3>Gems</h3>
+  <hr>
+  <ul>
+    <li>Use postgresql as the database for Active Record</li>
+    <li>Use bycrypt has_secure_password</li>
+    <li>Use RSpec and Capybara to do the testing</li>
+  </ul>
 </div>
 <div class="col-md-8">
-<h3>Running the tests</h3>
-<p>
+    <h3>Installing</h3>
+    <hr>
+    <p>For online access to the web app, please visit https://thawing-chamber-42985.herokuapp.com/</p><br>
 
+    <p>To run this app on your local machine, navigate to your repository folder and run the following cmd in terminal</p>
 
-There are over 30 RSpec tests for controller, model, and view.
+    <code>git clone https://github.com/paulliu87/todos.git</code><br><br>
 
-To run all the tests on the terminal, run the cmd below
+    <p>Once the project is downloaded, run the cmd to access the folder</p>
 
-bundle exec rspec spec
-To run the tests for specific controller or for specific unit method, follow the pattern as follow:
+    <code>cd todos</code><br><br>
 
-bundle exec rspec spec/controllers/users_controller_spec.rb
+    <p>Install gems</p>
 
-bundle exec rspec spec/controllers/users_controller_spec.rb:50
-</p>
+    <code>bundle install</code><br><br>
+
+    <p>Migrate the database</p>
+
+    <code>bundle exec rake db:migrate</code><br><br>
+
+    <p>Start the server</p>
+
+    <code>rails server</code><br><br>
+
+    <p>Now, you can open a chrome and enter <kbd>localhost:3000</kbd> to use the web app.</p>
+
+    <p>To deploy this project to heroku, make sure you have a heroku account.</p>
+</div>
+
+<div class="col-md-8">
+    <h3>Running the tests</h3>
+    <hr>
+    <p>There are over 30 RSpec tests for controller, model, and view.</p>
+
+    <p>To run all the tests on the terminal, run the cmd below</p>
+
+    <code>bundle exec rspec spec</code><br><br>
+
+    <p>To run the tests for specific controller or for specific unit method, follow the pattern as follow:</p>
+
+    <code>bundle exec rspec spec/controllers/users_controller_spec.rb</code>
+
+    <code>bundle exec rspec spec/controllers/users_controller_spec.rb:50</code>
+    </p>
+</div>
+
+<div class="col-md-8">
+    <h3>Deployment</h3>
+    <hr>
+    <a href="https://thawing-chamber-42985.herokuapp.com/">TODOs - Heroku site</a><br><br>
+
+    <p>Run the following command in the terminal</p>
+
+    <code>heroku create</code><br><br>
+
+    <p>Migrate pg db</p>
+
+    <code>heroku run rake db:migrate</code><br><br>
+
+    <p>Open the app in the terminal</p>
+
+    <code>heroku open</code><br>
+</div>
+
+<div class="col-md-8">
+    <h3>Support Documents</h3>
+    <hr>
+    <ul>
+        <li>Rails Doc. - Ruby on Rails</li>
+        <li>Stack Overflow - Very Helpful answers</li>
+        <li>Relish - RSpec Relish</li>
+        <li>Heroku - Heroku deployment</li>
+        <li>Trello - Project Management Tool</li>
+    </ul>
 </div>
 <div class="col-md-8">
-<h3>Deployment</h3>
+    <h3>Version Control</h3>
+    <hr>
+    <p>
+    Every time, I was working on a new feature. I add a new branch. Once I finish coding, I added and committed the change. Checkouted to master and merge it. Create a new branch and repeat the process.
 
-<p>
-https://thawing-chamber-42985.herokuapp.com/
+    ! [bootstrap] Add boostrap style ! [changestate] changing state between login ad logout ! [deploy] highlight the todo task is overdue ! [homepage] create a landingpage
 
-I deployed this project to heroku since it is free.
-
-Simply run
-
-heroku create
-Migrate pg db
-
-heroku run rake db:migrate
-Open the app
-
-heroku open
-
-
-</p>
+    [master] make a readme file ! [readme] highlight the todo task is overdue ! [session] add session controller to pass all the tests ! [todos] highlight the todo task is overdue ! [user] init sessions
+    </p>
 </div>
 <div class="col-md-8">
-<h3>Support Documents</h3>
-<p>
-
-
-Rails Doc. - Ruby on Rails
-Stack Overflow - Very Helpful answers
-Relish - RSpec Relish
-Heroku - Heroku deployment
-Trello - Project Management Tool
-</p>
-</div>
-<div class="col-md-8">
-<h3>Version Control</h3>
-<p>
-
-
-Every time, I was working on a new feature. I add a new branch. Once I finish coding, I added and committed the change. Checkouted to master and merge it. Create a new branch and repeat the process.
-
-! [bootstrap] Add boostrap style ! [changestate] changing state between login ad logout ! [deploy] highlight the todo task is overdued ! [homepage] create a landingpage
-
-[master] make a readme file ! [readme] highlight the todo task is overdued ! [session] add session controller to pass all the tests ! [todos] highlight the todo task is overdued ! [user] init sessions
-</p>
-</div>
-<div class="col-md-8">
-<h3>Authors</h3>
-
-Paul Liu - Initial work - todos
+    <h3>Authors</h3>
+    <hr>
+    Paul Liu - Initial work - todos
 </div>
