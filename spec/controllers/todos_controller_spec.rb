@@ -93,7 +93,67 @@ RSpec.describe TodosController, type: :controller do
         end
 
         it "marks a todo task as completed" do
-            expect {put :update, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.find(@todo.id).completed}.from(false).to(true)
+            expect {put :completed, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.find(@todo.id).completed}.from(false).to(true)
         end
     end
+
+    describe "GET #edit" do
+        before :each do
+            @todo = @user.todos.create(title: "complete take home project", deadline: DateTime.new(2017, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+        end
+
+        it "returns http success" do
+            get :edit, params: {user_id: @user.id, id: @todo.id}
+            expect(response).to have_http_status(:success)
+        end
+
+        it "renders the :edit template" do
+            get :edit,  params: {user_id: @user.id, id: @todo.id}
+            response.should render_template :edit
+        end
+    end
+
+    describe "PUT #update" do
+        before :each do
+            @todo = @user.todos.create(title: "complete take home project", deadline: DateTime.new(2017, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+        end
+        context "if update is success" do
+            it "redirects to show page" do
+                @attr = {:title => "this is a test", :deadline => @todo.deadline, :completed => @todo.completed, :detail => @todo.detail}
+
+                put :update, params: {user_id: @user.id, id: @todo.id, todo: @attr}
+                expect(response).to redirect_to user_todo_path
+            end
+
+            it "has redirect status" do
+                @attr = {:title => "this is a test", :deadline => @todo.deadline, :completed => @todo.completed, :detail => @todo.detail}
+                put :update, params: {user_id: @user.id, id: @todo.id, todo: @attr}
+                expect(response).to have_http_status(302)
+            end
+
+            it "updates the information of original todo" do
+                @attr = {:title => "this is a test", :deadline => @todo.deadline, :completed => @todo.completed, :detail => @todo.detail}
+                expect {put :update, params: {user_id: @user.id, id: @todo.id, todo: @attr}}.to change{Todo.find(@todo).title}.from("complete take home project").to("this is a test")
+            end
+        end
+        context "if update is not success" do
+            it "renders edit page" do
+                @attr = {:title => ""}
+                put :update, params: {user_id: @user.id, id: @todo.id, todo: @attr}
+                expect(response).to render_template :edit
+            end
+
+            it "has 200 status" do
+                @attr = {:title => ""}
+                put :update, params: {user_id: @user.id, id: @todo.id, todo: @attr}
+                expect(response).to have_http_status(200)
+            end
+            it "does not update the information of original todo" do
+                @attr = {:title => ""}
+                put :update, params: {user_id: @user.id, id: @todo.id, todo: @attr}
+                expect(@todo.title).to eq("complete take home project")
+            end
+        end
+    end
+
 end
