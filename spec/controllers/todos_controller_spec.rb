@@ -96,4 +96,60 @@ RSpec.describe TodosController, type: :controller do
             expect {put :update, params: {user_id: @user.id, id: @todo.id}}.to change{Todo.find(@todo.id).completed}.from(false).to(true)
         end
     end
+
+    describe "GET #edit" do
+        before :each do
+            @todo = @user.todos.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+        end
+
+        it "returns a 200 status" do
+            get :edit, params: {id: @todo.id, user_id: @user.id}
+            expect(response).to have_http_status(200)
+        end
+
+        it "renders an edit template" do
+            get :edit, params: {id: @todo.id, user_id: @user.id}
+            expect(response).to render_template :edit
+        end
+    end
+
+    describe "PUT #update" do
+        before :each do
+            @todo = @user.todos.create(title: "complete take home project", deadline: DateTime.new(2012, 8, 29, 12, 34, 56), completed: false, detail: "Making a Todo List")
+        end
+
+        context "it updates correctly" do
+            it "returns a 302 status" do
+                @attr = {:title => "this is a test", :deadline => @todo.deadline, :completed => @todo.completed, :detail => @todo.detail}
+                put :update, params: {id: @todo.id, user_id: @user.id, todo: @attr}
+                expect(response).to have_http_status(302)
+            end
+            it "redirects to show page" do
+                @todo.title = {:title => "this is a test"}
+                put :update, params: {id: @todo.id, user_id: @user.id, todo: @todo}
+                expect(response).to redirect_to 'show'
+            end
+            it "updates the information of the todo" do
+                @todo.title = {:title => "this is a test"}
+                expect {put :update, params: {id: @todo.id, user_id: @user.id, todo: @todo}}.to change{Todo.find(@todo.id).title}.from("complete take home project").to("this is a test")
+            end
+        end
+
+        context "it does not update correctly" do
+            it "returns a 200 status" do
+                @todo.title = {:title => ""}
+                put :update, params: {id: @todo.id, user_id: @user.id, todo: @todo}
+                expect(response).to have_http_status(200)
+            end
+            it "renders edit page" do
+                @todo.title = {:title => ""}
+                put :update, params: {id: @todo.id, user_id: @user.id, todo: @todo}
+                expect(response).to render_template 'edit'
+            end
+            it "updates the information of the todo" do
+                @todo.title = {:title => ""}
+                expect {put :update, params: {id: @todo.id, user_id: @user.id, todo: @todo}}.to not_change
+            end
+        end
+    end
 end

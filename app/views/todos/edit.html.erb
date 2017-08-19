@@ -1,0 +1,38 @@
+<h3>Please Edit</h3>
+
+<div class="row">
+    <div class="col-md-1">
+        <span class="text">Title:</span>
+    </div>
+    <div class="col-md-5">
+        <span class="text-muted"><%= @todo.title %></span>
+    </div>
+</div><br>
+<div class="row">
+    <div class="col-md-1">
+        <span class="text">Deadline:</span>
+    </div>
+    <div class="col-md-5">
+        <span class="text-muted"><%= @todo.deadline %></span>
+    </div>
+</div><br>
+<div class="row">
+    <div class="col-md-1">
+        <span class="text">Complete:</span>
+    </div>
+    <div class="col-md-5">
+        <span class="text-muted"><%= @todo.completed %></span>
+    </div>
+</div><br>
+<div class="row">
+    <div class="col-md-1">
+        <span class="text">Detail:</span>
+    </div>
+    <div class="col-md-5">
+        <span class="text-muted"><%= @todo.detail %></span>
+    </div>
+</div><br>
+<div class="row">
+    <%= link_to 'Back', { :controller => 'todos', :action => 'show', :id => @todo.id },
+    { :method => :get, :class => "btn btn-default", :role => "button"} %>
+</div>

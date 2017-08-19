@@ -15,7 +15,7 @@
                 <% end %>
             </div>
             <div class="col-md-1 col-md-offset-1">
-                <%= link_to 'Delete', { :controller => 'todos', :action => 'destroy', :id => todo.id},
+                <%= link_to 'Delete', url: user_doto_delete_path(@id:),
                                       { :method => :delete, :remote => true, :class => "list-group-item list-group-item-action" } %>
             </div>
             <div class="col-md-2">
