@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
-
+  put '/users/:user_id/todos/:id/completed', to: 'todos#completed'
   root 'home#index'
   resources :users do
       resources :todos
