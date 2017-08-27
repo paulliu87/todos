@@ -15,11 +15,19 @@
                 <% end %>
             </div>
             <div class="col-md-1 col-md-offset-1">
-                <%= link_to 'Delete', url: user_doto_delete_path(@id:),
+                <%= link_to 'Delete', { :controller => 'todos', :action => 'destroy', :id => todo.id },
                                       { :method => :delete, :remote => true, :class => "list-group-item list-group-item-action" } %>
             </div>
             <div class="col-md-2">
-                <%= link_to 'Mark Completed', { :controller => 'todos', :action => 'completed', :id => todo.id }, { :method => :put, :remote => true, :class => "list-group-item list-group-item-action"} %>
+                <%= link_to 'Mark Completed', {
+                  :controller => 'todos',
+                  :action => 'completed',
+                  :id => todo.id
+                }, {
+                  :method => :put,
+                  :remote => true,
+                  :class => "list-group-item list-group-item-action"
+                } %>
             </div>
         </div>
     <% end %>
