@@ -15,9 +15,21 @@ $(document).ready ->
     list = $(this).closest('a')
     listID = $(list).data('listId')
     path = $(list).attr('href')
+    $.ajax({
+      url: path
+      method: 'DELETE'
+      complete: ->
+        $(list).parents('div .row').remove()
+    })
 
+  $("span .glyphicon-ok").click (e) ->
+    e.preventDefault()
+    list = $(this).closest('a')
+    listID = $(list).data('listId')
+    path = $(list).attr('href')
     $.ajax({
       url: path
       method: 'DELETE'
     }).done ->
-      $(list).parents('div').remove()
+      debugger
+      $(list).parents('div .row').remove()

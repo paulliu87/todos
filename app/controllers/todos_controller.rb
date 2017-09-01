@@ -22,8 +22,8 @@ class TodosController < ApplicationController
 
     def destroy
         Todo.find_by_id(params[:id]).destroy!
-        if !request.xhr?
-          redirect_to "/users/#{params[:user_id]}/todos"
+        respond_to do |format|
+          format.html { redirect_to user_todos_path, notice: 'Item was successfully deleted.' }
         end
     end
 
@@ -45,6 +45,7 @@ class TodosController < ApplicationController
             render 'edit'
         end
     end
+
     private
         def todo_params
             params.require(:todo).permit(:title, :deadline, :completed, :detail)
