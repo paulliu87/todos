@@ -27,9 +27,13 @@ $(document).ready ->
     list = $(this).closest('a')
     listID = $(list).data('listId')
     path = $(list).attr('href')
+    debugger
     $.ajax({
-      url: path
-      method: 'DELETE'
-    }).done ->
-      debugger
-      $(list).parents('div .row').remove()
+      url: path + '/completed'
+      method: 'PUT'
+      complete: ->
+        $(list).removeClass('list-group-item-danger')
+        $(list).addClass('list-group-item-success')
+        $(list).children().first().removeClass('glyphicon-question-sign')
+        $(list).children().first().addClass('glyphicon-ok-sign')
+    })

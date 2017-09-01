@@ -30,7 +30,10 @@ class TodosController < ApplicationController
     def completed
         @todo = Todo.find_by_id(params[:id])
         @todo.is_completed
-        redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}"
+        respond_to do |format|
+          format.html { redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}" }
+          format.json { @todo.completed.to_json }
+        end
     end
 
     def edit
