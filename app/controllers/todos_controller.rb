@@ -21,8 +21,10 @@ class TodosController < ApplicationController
     end
 
     def destroy
-        Todo.find_by_id(params[:id]).destroy
-        redirect_to "/users/#{params[:user_id]}/todos"
+        Todo.find_by_id(params[:id]).destroy!
+        if !request.xhr?
+          redirect_to "/users/#{params[:user_id]}/todos"
+        end
     end
 
     def completed
