@@ -27,7 +27,6 @@ $(document).ready ->
     list = $(this).closest('a')
     listID = $(list).data('listId')
     path = $(list).attr('href')
-    debugger
     $.ajax({
       url: path + '/completed'
       method: 'PUT'
