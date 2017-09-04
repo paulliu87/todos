@@ -7,7 +7,7 @@
     <% @todos.each do |todo| %>
       <div class="row" style='margin-top: 0.1em'>
         <% if todo.overdue %>
-          <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action col-md-6  clearfix list-group-item-danger">
+          <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix list-group-item-danger">
             <span class="glyphicon glyphicon-question-sign"></span>
             <%= todo.title %>
             <span class="pull-right">
@@ -17,7 +17,7 @@
             </span>
           </a>
         <% else %>
-          <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action col-md-6 clearfix">
+          <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix">
             <span class="glyphicon glyphicon-question-sign"></span>
             <%= todo.title %>
             <span class="pull-right">

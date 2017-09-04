@@ -2,6 +2,7 @@ class TodosController < ApplicationController
     before_filter :authorize
     def index
         @todos = Todo.check_overdued(params[:user_id])
+        @recent_todos = @todos.sort_by(&:updated_at).reverse!.take(5)
     end
     def show
         @todo = Todo.find_by_id(params[:id])
