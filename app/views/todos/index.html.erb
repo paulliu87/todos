@@ -1,33 +1,42 @@
 <% content_for(:sidebar) do %>
   <%= render :partial => "layouts/sidebar" %>
 <% end %>
-<h1>TODOs</h1>
+<h3>TODOs</h3>
 <div class="list-group">
 <% if @todos != nil %>
-    <% @todos.each do |todo| %>
-      <div class="row" style='margin-top: 0.1em'>
-        <% if todo.overdue %>
-          <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix list-group-item-danger">
-            <span class="glyphicon glyphicon-question-sign"></span>
-            <%= todo.title %>
-            <span class="pull-right">
-              <span class="glyphicon glyphicon-edit" style='margin-right:0.5em; display:inline-block'></span>
-              <span class="glyphicon glyphicon-trash" style='margin-right:0.5em; display:inline-block'></span>
-              <span class="glyphicon glyphicon-ok"></span>
-            </span>
-          </a>
-        <% else %>
-          <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix">
-            <span class="glyphicon glyphicon-question-sign"></span>
-            <%= todo.title %>
-            <span class="pull-right">
-              <span class="glyphicon glyphicon-edit" style='margin-right:0.5em; display:inline-block'></span>
-              <span class="glyphicon glyphicon-trash" style='margin-right:0.5em; display:inline-block'></span>
-              <span class="glyphicon glyphicon-ok"></span>
-            </span>
-          </a>
-        <% end %>
+    <% @todos.each do |key, value| %>
+      <div class="row">
+        <span class="list-group-item list-group-item-action clearfix" src="/images/summer.jpg" style="padding-left:25px;background:url("/images/summer.jpg") no-repeat top left;display: inline-block;height: 17px;width: 50px;"><%= key %></span>
+        <span class="list-group-item list-group-item-action clearfix">
+          <img src="/images/summer.jpg"  class="img-reponsive img-rounded" style="max-height: 100%; max-width: 100%; padding: 0px;" />
+        </span>
       </div>
+      <% value.each do |todo| %>
+        <div class="row" style='margin-top: 0.1em'>
+          <% if todo.overdue %>
+            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix list-group-item-danger">
+              <span class="glyphicon glyphicon-question-sign"></span>
+              <%= todo.title %>
+              <span class="pull-right">
+                <span class="glyphicon glyphicon-edit" style='margin-right:0.5em; display:inline-block'></span>
+                <span class="glyphicon glyphicon-trash" style='margin-right:0.5em; display:inline-block'></span>
+                <span class="glyphicon glyphicon-ok"></span>
+              </span>
+            </a>
+          <% else %>
+            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix">
+              <span class="glyphicon glyphicon-question-sign"></span>
+              <%= todo.title %>
+              <span class="pull-right">
+                <span class="glyphicon glyphicon-edit" style='margin-right:0.5em; display:inline-block'></span>
+                <span class="glyphicon glyphicon-trash" style='margin-right:0.5em; display:inline-block'></span>
+                <span class="glyphicon glyphicon-ok"></span>
+              </span>
+            </a>
+          <% end %>
+        </div>
+      <% end %>
+      <br>
     <% end %>
 <% end %>
 </div>

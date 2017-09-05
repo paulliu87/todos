@@ -1,9 +1,27 @@
 class TodosController < ApplicationController
     before_filter :authorize
     def index
-        @todos = Todo.check_overdued(params[:user_id])
-        @recent_todos = @todos.sort_by(&:updated_at).reverse!.take(5)
+      todos = Todo.check_overdued(params[:user_id])
+      if todos.nil?
+        @todos = nil
+        @recent_todos = nil
+      else
+        uncompleted_todos = todos.select { |todo| todo.completed == false }
+        @todos = {}
+        uncompleted_todos.sort_by(&:deadline).each do |todo|
+          key = todo.deadline.to_date.to_s.to_sym
+          if @todos.key?(key)
+            @todos[key].push(todo)
+          else
+            @todos[key] = []
+            @todos[key].push(todo)
+          end
+        end
+        completed_todos = todos.select { |todo| todo.completed == true }
+        @recent_todos = completed_todos.sort_by(&:updated_at).reverse!.take(5)
+      end
     end
+
     def show
         @todo = Todo.find_by_id(params[:id])
     end
