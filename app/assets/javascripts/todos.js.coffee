@@ -19,7 +19,8 @@ $(document).ready ->
       url: path
       method: 'DELETE'
       complete: ->
-        $(list).parents('div .row').remove()
+        debugger
+        $(list).parents('div .row').first().remove()
     })
 
   $("span .glyphicon-ok").click (e) ->
