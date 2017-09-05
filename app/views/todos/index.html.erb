@@ -6,10 +6,8 @@
 <% if @todos != nil %>
     <% @todos.each do |key, value| %>
       <div class="row">
-        <span class="list-group-item list-group-item-action clearfix" src="/images/summer.jpg" style="padding-left:25px;background:url("/images/summer.jpg") no-repeat top left;display: inline-block;height: 17px;width: 50px;"><%= key %></span>
-        <span class="list-group-item list-group-item-action clearfix">
-          <img src="/images/summer.jpg"  class="img-reponsive img-rounded" style="max-height: 100%; max-width: 100%; padding: 0px;" />
-        </span>
+        <span class="col-md-2 list-group-item list-group-item-action clearfix" style="display: inline-block;height: 60px;"><%= key %></span>
+        <img src="/images/summer.jpg"  class="col-md-10 img-reponsive img-rounded list-group-item list-group-item-action clearfix" style="max-height: 60px; max-width: auto; padding: 0px;" />
       </div>
       <% value.each do |todo| %>
         <div class="row" style='margin-top: 0.1em'>
