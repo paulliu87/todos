@@ -1,27 +1,26 @@
 <% content_for(:sidebar) do %>
   <%= render :partial => "layouts/sidebar" %>
 <% end %>
-<h3>TODOs</h3>
 <div class="list-group">
 <% if @todos != nil %>
     <% @todos.each do |key, value| %>
-      <div class="row">
-        <div>
-          <img src="/images/summer.jpg"  class="col-md-12 img-reponsive img-rounded list-group-item list-group-item-action clearfix" style="max-height: 60px; max-width: auto; padding: 0px;" />
-          <div class="cal-section">
+      <div class="row" style='margin-top: 0.1em'>
+        <!-- <div> -->
+          <div class="cal-section col-md-1">
             <time class="icon">
-              <p>Dec</p>
+              <p><%= key.to_s[5..6] %></p>
               <div class="cal-top"></div>
-              <span>5</span>
+              <span><%= key.to_s[8..9] %></span>
             </time>
           </div>
+          <img src="/images/summer.jpg"  class="pull-right col-md-10 img-reponsive img-rounded list-group-item list-group-item-action clearfix" style="max-height: 60px; max-width: auto; padding: 0px;" />
           <!-- <span class="col-md-2 list-group-item list-group-item-action clearfix" style="height: 60px;"><%= key %></span> -->
-        </div>
       </div>
+      <!-- </div> -->
       <% value.each do |todo| %>
         <div class="row" style='margin-top: 0.1em'>
           <% if todo.overdue %>
-            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix list-group-item-danger">
+            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 list-group-item list-group-item-action clearfix list-group-item-danger">
               <span class="glyphicon glyphicon-question-sign"></span>
               <%= todo.title %>
               <span class="pull-right">
@@ -31,7 +30,7 @@
               </span>
             </a>
           <% else %>
-            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix">
+            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 list-group-item list-group-item-action clearfix">
               <span class="glyphicon glyphicon-question-sign"></span>
               <%= todo.title %>
               <span class="pull-right">

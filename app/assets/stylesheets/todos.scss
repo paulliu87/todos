@@ -10,7 +10,7 @@
 
 $calTopRed: #EE5838;
 $calBottomRed: #BA3418;
-$backgroundRed: #FF8361;
+$backgroundRed: #2EFFC4;
 
 .cal-section {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -26,11 +26,6 @@ body {
   margin: 0 auto;
   padding-left: 0;
   padding-right: 0;
-  position: relative;
-  left:50%;
-  margin-left:-320px;
-  margin-right: 0;
-  top: -90px;
 
   & time.icon {
     border-radius:40px;
