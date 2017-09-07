@@ -19,7 +19,6 @@ $(document).ready ->
       url: path
       method: 'DELETE'
       complete: ->
-        debugger
         $(list).parents('div .row').first().remove()
     })
 
@@ -37,3 +36,29 @@ $(document).ready ->
         $(list).children().first().removeClass('glyphicon-question-sign')
         $(list).children().first().addClass('glyphicon-ok-sign')
     })
+# # # # # # # # # # # # # # # # # # # # # # # #
+# change the format of the month from interger to abbreviation
+# # # # # # # # # # # # # # # # # # # # # # # #
+
+  calCal = (month) ->
+    switch (month)
+      when "01" then "Jan"
+      when "02" then "Feb"
+      when "03" then "Mar"
+      when "04" then "Apr"
+      when "05" then "May"
+      when "06" then "Jun"
+      when "07" then "Jul"
+      when "08" then "Aug"
+      when "09" then "Sept"
+      when "10" then "Oct"
+      when "11" then "Nov"
+      when "12" then "Dec"
+
+  replaceCal = () ->
+    $('.cal-section p').each (index) ->
+        num = $(this).text()
+        month = ""
+        month = calCal(num)
+        $(this).text(month)
+  replaceCal()
