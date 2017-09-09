@@ -18,7 +18,14 @@ $backgroundRed: #2EFFC4;
 }
 
 body {
-  background-color: white;
+  // background-image: url("/images/planet.jpg");
+  // background-color: white;
+
+  background: url(/images/relax.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .cal-section {
