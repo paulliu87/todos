@@ -7,6 +7,13 @@
   text-align: center;
 }
 
+.list-group-item {
+  border: 1px solid white;
+}
+
+h3 {
+  color: white;
+}
 
 $calTopRed: #EE5838;
 $calBottomRed: #BA3418;
@@ -20,7 +27,7 @@ $backgroundRed: #2EFFC4;
 body {
   // background-image: url("/images/planet.jpg");
   // background-color: white;
-
+  // overflow: hidden;
   background: url(/images/relax.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -35,9 +42,9 @@ body {
   padding-right: 0;
 
   & time.icon {
-    border-radius:40px;
+    border-radius: 40px;
     border:1px solid white;
-    transition: all .4s ease-in-out;
+    transition: all .1s ease-in-out;
     &:hover {
       -webkit-box-shadow: 0 1px 2px rgba(38, 50, 56, .5);
       -moz-box-shadow: 0 1px 2px rgba(38, 50, 56, .5);
@@ -81,4 +88,41 @@ body {
       color: black;
     }
   }
+}
+
+.sidebar {
+  margin-top: 60px;
+  top: 0;
+  right: 3%;
+  position: fixed;
+  overflow: hidden;
+}
+
+.content {
+  // background: red;
+  // overflow: auto;
+  display: block;
+  margin-top: 60px;
+  overflow-y: auto;
+}
+
+.navbar-inverse {
+  background-color: transparent;
+  border-color: white;
+  margin-bottom: 1px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 9999;
+  // position: absolute;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+}
+.navbar-inverse .navbar-brand {
+  color: white;
 }

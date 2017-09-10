@@ -18,7 +18,7 @@
       </div>
       <!-- </div> -->
       <% value.each do |todo| %>
-        <div class="row uncompleted-todos" style='margin-top: 0.1em'>
+      <div class="row uncompleted-todos" style='margin-top: 0.1em'>
           <% if todo.overdue %>
             <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 list-group-item list-group-item-action clearfix list-group-item-danger">
               <span class="glyphicon glyphicon-question-sign"></span>

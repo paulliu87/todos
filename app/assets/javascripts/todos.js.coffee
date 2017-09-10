@@ -62,15 +62,15 @@ $(document).ready ->
       when "06" then "Jun"
       when "07" then "Jul"
       when "08" then "Aug"
-      when "09" then "Sept"
+      when "09" then "Sep"
       when "10" then "Oct"
       when "11" then "Nov"
       when "12" then "Dec"
 
   replaceCal = () ->
     $('.cal-section p').each (index) ->
-        num = $(this).text()
-        month = ""
-        month = calCal(num)
-        $(this).text(month)
+      num = $(this).text()
+      month = ""
+      month = calCal(num)
+      $(this).text(month)
   replaceCal()
