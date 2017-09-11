@@ -47,12 +47,21 @@ class TodosController < ApplicationController
     end
 
     def completed
-        @todo = Todo.find_by_id(params[:id])
-        @todo.is_completed
-        respond_to do |format|
-          format.html { redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}" }
-          format.json { @todo.completed.to_json }
-        end
+      @todo = Todo.find_by_id(params[:id])
+      @todo.is_completed
+      respond_to do |format|
+        format.html { redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}" }
+        format.json { @todo.completed.to_json }
+      end
+    end
+
+    def uncompleted
+      @todo = Todo.find_by_id(params[:id])
+      @todo.is_uncompleted
+      respond_to do |format|
+        format.html { redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}" }
+        format.json { @todo.completed.to_json }
+      end
     end
 
     def edit

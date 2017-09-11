@@ -22,4 +22,8 @@ class Todo < ApplicationRecord
     def is_completed
         self.update(completed: true)
     end
+
+    def is_uncompleted
+      self.update(completed: false)
+    end
 end
