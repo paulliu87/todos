@@ -74,3 +74,25 @@ $(document).ready ->
       month = calCal(num)
       $(this).text(month)
   replaceCal()
+
+
+$(window).on "load", ->
+  $(window).scroll ->
+    botBoundry = $(this).scrollTop() + $(this).innerHeight()
+    topBoundry = $(this).scrollTop() + $('div.container-fluid').outerHeight()
+    # console.log("topBoundry is " + topBoundry)
+    # console.log($(".row:nth(0)").offset().top)
+    $(".row").each ->
+      objectBottom = $(this).offset().top + $(this).outerHeight()
+      objectTop = $(this).offset().top
+      # bottom todo fadein and fadeout
+      if objectBottom < botBoundry and objectTop > topBoundry
+        $(this).fadeTo(200,1) if ($(this).css("opacity")=="0")
+      else if objectBottom > botBoundry and objectTop > topBoundry
+        $(this).fadeTo(200,0) if ($(this).css("opacity")=="1")
+      # top todo fadein and fadeout
+      else if objectBottom < botBoundry and objectTop < topBoundry
+        $(this).fadeTo(10,0) if ($(this).css("opacity")=="1")
+      else if objectBottom < botBoundry and objectTop > topBoundry
+        $(this).fadeTo(10,1) if ($(this).css("opacity")=="0")
+.scroll()

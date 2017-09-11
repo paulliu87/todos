@@ -28,7 +28,7 @@ body {
   // background-image: url("/images/planet.jpg");
   // background-color: white;
   // overflow: hidden;
-  background: url(/images/relax.jpg) no-repeat center center fixed;
+  background: url(/images/desk.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -125,4 +125,10 @@ body {
 }
 .navbar-inverse .navbar-brand {
   color: white;
+}
+
+.fade {
+  margin: 5px;
+  background-color: red;
+  opacity: 1;
 }

@@ -28,6 +28,11 @@
                 <span class="glyphicon glyphicon-trash" style='margin-right:0.5em; display:inline-block'></span>
                 <span class="glyphicon glyphicon-ok"></span>
               </span>
+              <br>
+              <% if todo.detail != nil %>
+                <%= todo.detail %>
+              <% end %>
+              <%= todo.deadline %>
             </a>
           <% else %>
             <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 list-group-item list-group-item-action clearfix">
@@ -38,6 +43,11 @@
                 <span class="glyphicon glyphicon-trash" style='margin-right:0.5em; display:inline-block'></span>
                 <span class="glyphicon glyphicon-ok"></span>
               </span>
+              <br>
+              <% if todo.detail != nil %>
+                <%= todo.detail %>
+              <% end %>
+              <%= todo.deadline %>
             </a>
           <% end %>
         </div>
