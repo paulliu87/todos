@@ -51,7 +51,7 @@ class TodosController < ApplicationController
       @todo.is_completed
       respond_to do |format|
         format.html { redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}" }
-        format.json { @todo.completed.to_json }
+        format.json { render json: @todo.as_json(root: false) }
       end
     end
 
@@ -60,7 +60,7 @@ class TodosController < ApplicationController
       @todo.is_uncompleted
       respond_to do |format|
         format.html { redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}" }
-        format.json { @todo.completed.to_json }
+        format.json { render json: @todo.as_json(root: false) }
       end
     end
 
