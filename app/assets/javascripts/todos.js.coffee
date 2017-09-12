@@ -1,17 +1,20 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# gliphicon actions (edit, destroy, completed and uncompleted)
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 $(document).ready ->
-  $("span .glyphicon-edit").click (e) ->
-    e.preventDefault()
+  $("span .glyphicon-edit").click (event) ->
+    event.preventDefault()
     list = $(this).closest('a')
     listID = $(list).data('listId')
     path = $(list).attr('href')
     window.location = path + "/edit"
 
-
-  $("span .glyphicon-trash").click (e) ->
-    e.preventDefault()
+  $("span .glyphicon-trash").click (event) ->
+    event.preventDefault()
     list = $(this).closest('a')
     listID = $(list).data('listId')
     path = $(list).attr('href')
@@ -22,8 +25,8 @@ $(document).ready ->
         $(list).parents('div .row').first().remove()
     })
 
-  $("span .glyphicon-ok").click (e) ->
-    e.preventDefault()
+  $("span .glyphicon-ok").click (event) ->
+    event.preventDefault()
     list = $(this).closest('a')
     listID = $(list).data('listId').toString()
     listTitle = list.text().trim()
@@ -47,11 +50,10 @@ $(document).ready ->
         $('.recently-completed').prepend(completedList)
       )
 
-  $("span .glyphicon-step-backward").click (e) ->
-    e.preventDefault()
+  $("span .glyphicon-step-backward").click (event) ->
+    event.preventDefault()
     list = $(this).closest('a')
     path = $(list).attr('href')
-    # debugger
     $.ajax(
       url: path + '/uncompleted'
       method: 'PUT'
@@ -68,15 +70,23 @@ $(document).ready ->
       date = data.deadline.substring(0,10)
       uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
       classAttr = $(uncompletedTodos).next().children('a').attr("class")
-      # debugger
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# remove todo from the completed list and append the 4th recently
+# completed todo to completed list
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+      $("a[data-list-id=" + data.id + "]").remove()
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# add a todo back to uncompleted list and apply css
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
       $(uncompletedTodos).after(uncompletedList)
       $(uncompletedTodos).next().children('a').addClass(classAttr)
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# remove the todo from the completed list
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     )
-
-# # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # change the format of the month from interger to abbreviation
-# # # # # # # # # # # # # # # # # # # # # # # #
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   calCal = (month) ->
     switch (month)
       when "01" then "Jan"
@@ -91,7 +101,6 @@ $(document).ready ->
       when "10" then "Oct"
       when "11" then "Nov"
       when "12" then "Dec"
-
   replaceCal = () ->
     $('.cal-section p').each (index) ->
       num = $(this).text()
@@ -99,23 +108,26 @@ $(document).ready ->
       month = calCal(num)
       $(this).text(month)
   replaceCal()
-
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# fadein and fadeout feature while scrolling
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 $(window).on "load", ->
   $(window).scroll ->
     botBoundry = $(this).scrollTop() + $(this).innerHeight()
     topBoundry = $(this).scrollTop() + $('div.container-fluid').outerHeight()
-    # console.log("topBoundry is " + topBoundry)
-    # console.log($(".row:nth(0)").offset().top)
     $(".row").each ->
       objectBottom = $(this).offset().top + $(this).outerHeight()
       objectTop = $(this).offset().top
-      # bottom todo fadein and fadeout
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# bottom todo fadein and fadeout
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
       if objectBottom < botBoundry and objectTop > topBoundry
         $(this).fadeTo(200,1) if ($(this).css("opacity")=="0")
       else if objectBottom > botBoundry and objectTop > topBoundry
         $(this).fadeTo(200,0) if ($(this).css("opacity")=="1")
-      # top todo fadein and fadeout
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# top todo fadein and fadeout
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
       else if objectBottom < botBoundry and objectTop < topBoundry
         $(this).fadeTo(10,0) if ($(this).css("opacity")=="1")
       else if objectBottom < botBoundry and objectTop > topBoundry
