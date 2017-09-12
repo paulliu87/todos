@@ -34,7 +34,7 @@ $(document).ready ->
     userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
     completedList = '<div class="row" style="margin-top: 0.1em">' +
                       '<a href="/users/' + userID + '/todos/' + listID + '" data-list-id="' + listID + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
-                        '<span class="glyphicon glyphicon-ok-sign" style="margin-right:0.5em; display:inline-block"></span>' + listTitle + '<span class="pull-right">' +
+                        '<span class="glyphicon glyphicon-ok-sign"></span>' + listTitle + '<span class="pull-right">' +
                           '<span class="glyphicon glyphicon-step-backward"></span>' +
                         '</span>' +
                       '</a>' +
@@ -64,10 +64,10 @@ $(document).ready ->
                             '<a href="/users/' + data.user_id + '/todos/' + data.id + '" data-list-id="' + data.id + '">' +
                               data.title +
                               '<span class="pull-right">' +
-                                '<span class="glyphicon glyphicon-edit" style="margin-right:0.5em; display:inline-block"></span>' +
-                                '<span class="glyphicon glyphicon-trash" style="margin-right:0.5em; display:inline-block"></span>' +
-                                '<span class="glyphicon glyphicon-ok"></span>' +
-                              '</span><br><span>' + data.deadline + '</span></a></div>'
+                                '<span class="glyphicon glyphicon-edit"></span>' +
+                                '<span class="glyphicon glyphicon-trash"></span>' +
+                                '<span class="glyphicon glyphicon-ok"></span></span><br><span>' +
+                                data.deadline + '</span></a></div>'
         date = data.deadline.substring(0,10)
         uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
         classAttr = $(uncompletedTodos).next().children('a').attr("class")
@@ -85,7 +85,7 @@ $(document).ready ->
 # remove the todo from the completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
       )
-      
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # change the format of the month from interger to abbreviation
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

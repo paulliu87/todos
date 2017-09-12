@@ -2,9 +2,9 @@
 <% if current_user %>
   <div class="recently-completed">
     <% @recent_todos.each do |todo| %>
-      <div class="row" style='margin-top: 0.1em'>
+      <div class="row">
         <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="list-group-item list-group-item-action clearfix list-group-item-success">
-          <span class="glyphicon glyphicon-ok-sign" style="margin-right: 0.5em"></span>
+          <span class="glyphicon glyphicon-ok-sign"></span>
           <%= todo.title %>
           <span class="pull-right">
             <span class="glyphicon glyphicon-step-backward"></span>
