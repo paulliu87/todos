@@ -41,41 +41,37 @@ $(document).ready ->
       method: 'PUT'
       dataType: "json"
       ).success((data) ->
-        console.log(data)
-        debugger
         $(list).removeClass('list-group-item-danger')
         $(list).addClass('list-group-item-success')
         $('.recently-completed > div').last().remove()
         $('.recently-completed').prepend(completedList)
       )
 
-  # $("span .glyphicon-step-backward").click (e) ->
-  #   e.preventDefault()
-  #   list = $(this).closest('a')
-  #   listID = $(list).data('listId').toString()
-  #   listTitle = list.text().trim()
-  #   path = $(list).attr('href')
-  #   debugger
-  #   userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
-  #   uncompletedList = '<div class="row uncompleted-todos" style="margin-top: 0.1em">' +
-  #                       '<a href="/users/' + userID + '/todos/' + listID + '" data-list-id="' + listID + '" class="pull-right col-md-10 list-group-item list-group-item-action clearfix">' +
-  #                         listTitle +
-  #                         '<span class="pull-right">' +
-  #                           '<span class="glyphicon glyphicon-edit" style="margin-right:0.5em; display:inline-block"></span>' +
-  #                           '<span class="glyphicon glyphicon-trash" style="margin-right:0.5em; display:inline-block"></span>' +
-  #                           '<span class="glyphicon glyphicon-ok"></span>' +
-  #                         '</span><br><span></span></a></div>'
-  #   debugger
-  #   $.ajax({
-  #     url: path + '/uncompleted'
-  #     method: 'PUT'
-  #     complete: ->
-  #       $(list).removeClass('list-group-item-danger')
-  #       $(list).addClass('list-group-item-success')
-  #       $(list).children().first().addClass('glyphicon-ok-sign')
-  #       $('.recently-completed > div').last().remove()
-  #       $('.recently-completed').prepend(completedList)
-  #   })
+  $("span .glyphicon-step-backward").click (e) ->
+    e.preventDefault()
+    list = $(this).closest('a')
+    path = $(list).attr('href')
+    # debugger
+    $.ajax(
+      url: path + '/uncompleted'
+      method: 'PUT'
+      dataType: "json"
+    ).success((data) ->
+      uncompletedList = '<div class="row uncompleted-todos" style="margin-top: 0.1em">' +
+                          '<a href="/users/' + data.user_id + '/todos/' + data.id + '" data-list-id="' + data.id + '">' +
+                            data.title +
+                            '<span class="pull-right">' +
+                              '<span class="glyphicon glyphicon-edit" style="margin-right:0.5em; display:inline-block"></span>' +
+                              '<span class="glyphicon glyphicon-trash" style="margin-right:0.5em; display:inline-block"></span>' +
+                              '<span class="glyphicon glyphicon-ok"></span>' +
+                            '</span><br><span>' + data.deadline + '</span></a></div>'
+      date = data.deadline.substring(0,10)
+      uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
+      classAttr = $(uncompletedTodos).next().children('a').attr("class")
+      # debugger
+      $(uncompletedTodos).after(uncompletedList)
+      $(uncompletedTodos).next().children('a').addClass(classAttr)
+    )
 
 # # # # # # # # # # # # # # # # # # # # # # # #
 # change the format of the month from interger to abbreviation
