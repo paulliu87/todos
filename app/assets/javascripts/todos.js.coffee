@@ -6,14 +6,14 @@
 # gliphicon actions (edit, destroy, completed and uncompleted)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 $(document).ready ->
-  $("span .glyphicon-edit").click (event) ->
+  $(".list-group").on "click", "span .glyphicon-edit", (event) ->
     event.preventDefault()
     list = $(this).closest('a')
     listID = $(list).data('listId')
     path = $(list).attr('href')
     window.location = path + "/edit"
 
-  $("span .glyphicon-trash").click (event) ->
+  $(".list-group").on "click", "span .glyphicon-trash", (event) ->
     event.preventDefault()
     list = $(this).closest('a')
     listID = $(list).data('listId')
@@ -25,7 +25,7 @@ $(document).ready ->
         $(list).parents('div .row').first().remove()
     })
 
-  $("span .glyphicon-ok").click (event) ->
+  $(".list-group").on "click", "span .glyphicon-ok", (event) ->
     event.preventDefault()
     list = $(this).closest('a')
     listID = $(list).data('listId').toString()
@@ -33,7 +33,7 @@ $(document).ready ->
     path = $(list).attr('href')
     userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
     completedList = '<div class="row" style="margin-top: 0.1em">' +
-                      '<a href="/users/' + userID + '/todos/' + listID + '" recent-list-id="' + listID + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
+                      '<a href="/users/' + userID + '/todos/' + listID + '" data-list-id="' + listID + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
                         '<span class="glyphicon glyphicon-ok-sign" style="margin-right:0.5em; display:inline-block"></span>' + listTitle + '<span class="pull-right">' +
                           '<span class="glyphicon glyphicon-step-backward"></span>' +
                         '</span>' +
@@ -50,40 +50,42 @@ $(document).ready ->
         $('.recently-completed').prepend(completedList)
       )
 
-  $("span .glyphicon-step-backward").click (event) ->
+  $(".recently-completed").on "click", "span .glyphicon-step-backward", (event) ->
     event.preventDefault()
     list = $(this).closest('a')
     path = $(list).attr('href')
+    that = this
     $.ajax(
       url: path + '/uncompleted'
       method: 'PUT'
       dataType: "json"
-    ).success((data) ->
-      uncompletedList = '<div class="row uncompleted-todos" style="margin-top: 0.1em">' +
-                          '<a href="/users/' + data.user_id + '/todos/' + data.id + '" data-list-id="' + data.id + '">' +
-                            data.title +
-                            '<span class="pull-right">' +
-                              '<span class="glyphicon glyphicon-edit" style="margin-right:0.5em; display:inline-block"></span>' +
-                              '<span class="glyphicon glyphicon-trash" style="margin-right:0.5em; display:inline-block"></span>' +
-                              '<span class="glyphicon glyphicon-ok"></span>' +
-                            '</span><br><span>' + data.deadline + '</span></a></div>'
-      date = data.deadline.substring(0,10)
-      uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
-      classAttr = $(uncompletedTodos).next().children('a').attr("class")
+      ).success((data) ->
+        uncompletedList = '<div class="row uncompleted-todos" style="margin-top: 0.1em">' +
+                            '<a href="/users/' + data.user_id + '/todos/' + data.id + '" data-list-id="' + data.id + '">' +
+                              data.title +
+                              '<span class="pull-right">' +
+                                '<span class="glyphicon glyphicon-edit" style="margin-right:0.5em; display:inline-block"></span>' +
+                                '<span class="glyphicon glyphicon-trash" style="margin-right:0.5em; display:inline-block"></span>' +
+                                '<span class="glyphicon glyphicon-ok"></span>' +
+                              '</span><br><span>' + data.deadline + '</span></a></div>'
+        date = data.deadline.substring(0,10)
+        uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
+        classAttr = $(uncompletedTodos).next().children('a').attr("class")
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # remove todo from the completed list and append the 4th recently
 # completed todo to completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-      $("a[data-list-id=" + data.id + "]").remove()
+        $("a[data-list-id=" + data.id + "]").parent().remove()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # add a todo back to uncompleted list and apply css
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-      $(uncompletedTodos).after(uncompletedList)
-      $(uncompletedTodos).next().children('a').addClass(classAttr)
+        $(uncompletedTodos).after(uncompletedList)
+        $(uncompletedTodos).next().children('a').addClass(classAttr)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # remove the todo from the completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    )
+      )
+      
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # change the format of the month from interger to abbreviation
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
