@@ -96,6 +96,10 @@ body {
   right: 3%;
   position: fixed;
   overflow: hidden;
+  border-radius: 4px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border: 1px solid white;
 }
 
 .content {
@@ -133,12 +137,12 @@ body {
   opacity: 1;
 }
 
-.glyphicon {
+span .glyphicon {
   margin-right: 0.5em;
   display: inline-block;
 }
 
-.glyphicon-ok{
+span .glyphicon-ok{
   margin-right: 0;
 }
 
@@ -148,4 +152,13 @@ body {
 
 .uncompleted-todos {
   margin-top: 2px;
+}
+
+.recently-completed .row {
+  margin-top: 2px;
+}
+
+.sidebar h3 {
+  color: transparent;
+  text-shadow: -1px 0 transparent, 0 1px transparent, 1px 0 transparent, 0 -1px white;
 }
