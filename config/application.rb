@@ -18,7 +18,7 @@ class Application < Rails::Application
   config.assets.paths << "#{Rails}/app/assets/fonts"
   # Enable the asset pipeline
   config.assets.enabled = true
-    
+
   root.join('vendor', 'assets', 'bower_components').to_s.tap do |bower_path|
     config.sass.load_paths << bower_path
     config.assets.paths << bower_path
