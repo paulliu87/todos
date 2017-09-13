@@ -15,23 +15,16 @@ module Todos
 end
 
 class Application < Rails::Application
-    config.assets.paths << "#{Rails}/app/assets/fonts"
-    # Enable the asset pipeline
-    config.assets.enabled = true
-
-    # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
-
-    # Required for Devise on Heroku
-    config.assets.initialize_on_precompile = false
-
-    # config.autoload_paths += %W(#{config.root}/app/models/thawing-chamber-42985)
-    # config.assets.precompile += Todos.assets
-    # config.assets.precompile += %w(thawing-chamber-42985/*)
-    config.assets.precompile += %w( .svg .eot .woff .ttf )
-    config.assets.precompile += [ 'styles.css.scss']
-    config.assets.precompile += [
-        'glyphicons-halflings.png',
-        'glyphicons-halflings-white.png'
-      ]
+  config.assets.paths << "#{Rails}/app/assets/fonts"
+  # Enable the asset pipeline
+  config.assets.enabled = true
+    
+  root.join('vendor', 'assets', 'bower_components').to_s.tap do |bower_path|
+    config.sass.load_paths << bower_path
+    config.assets.paths << bower_path
+  end
+  # Precompile Bootstrap fonts
+  config.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+  # Minimum Sass number precision required by bootstrap-sass
+  ::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max
 end
