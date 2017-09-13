@@ -16,4 +16,22 @@ end
 
 class Application < Rails::Application
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
+    # Required for Devise on Heroku
+    config.assets.initialize_on_precompile = false
+
+    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    config.assets.precompile += Ckeditor.assets
+    config.assets.precompile += %w(ckeditor/*)
+    config.assets.precompile += %w( .svg .eot .woff .ttf )
+    config.assets.precompile += [ 'styles.css.scss']
+    config.assets.precompile += [
+        'glyphicons-halflings.png',
+        'glyphicons-halflings-white.png'
+      ]
 end
