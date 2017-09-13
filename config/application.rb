@@ -15,7 +15,7 @@ module Todos
 end
 
 class Application < Rails::Application
-    config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    config.assets.paths << "#{Rails}/app/assets/fonts"
     # Enable the asset pipeline
     config.assets.enabled = true
 
