@@ -25,9 +25,9 @@ class Application < Rails::Application
     # Required for Devise on Heroku
     config.assets.initialize_on_precompile = false
 
-    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-    config.assets.precompile += Ckeditor.assets
-    config.assets.precompile += %w(ckeditor/*)
+    # config.autoload_paths += %W(#{config.root}/app/models/thawing-chamber-42985)
+    # config.assets.precompile += Todos.assets
+    # config.assets.precompile += %w(thawing-chamber-42985/*)
     config.assets.precompile += %w( .svg .eot .woff .ttf )
     config.assets.precompile += [ 'styles.css.scss']
     config.assets.precompile += [
