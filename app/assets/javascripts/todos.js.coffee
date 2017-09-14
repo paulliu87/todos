@@ -76,57 +76,20 @@ $(document).ready ->
 # remove todo from the completed list and append the new recently
 # completed todos to completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-        addList = (prependedList, prependLocation, userID) ->
-          $(prependLocation).append(formateList(prependedList, userID))
-        removeTodos = (location) ->
-          $(location).children('.row').remove()
-        formateList = (todo, userID) ->
-          '<div class="row">' +
-            '<a href="/users/' + userID + '/todos/' + todo.id + '" data-list-id="' + todo.id + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
-              '<span class="glyphicon glyphicon-ok-sign"></span>' + todo.title + '<span class="pull-right">' +
-                '<span class="glyphicon glyphicon-step-backward"></span>' +
-              '</span>' +
-            '</a>' +
-          '</div>'
-        # userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
-        # prependLocation = $(".recently-completed")
         removeTodos(prependLocation)
         addList prependedList, prependLocation, userID for prependedList in data["completed_todos"]
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # add a todo back to uncompleted list and apply css
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
         $(uncompletedTodos).after(uncompletedList)
         $(uncompletedTodos).next().children('a').addClass(classAttr)
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# remove the todo from the completed list
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
       )
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # change the format of the month from interger to abbreviation
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  calCal = (month) ->
-    switch (month)
-      when "01" then "Jan"
-      when "02" then "Feb"
-      when "03" then "Mar"
-      when "04" then "Apr"
-      when "05" then "May"
-      when "06" then "Jun"
-      when "07" then "Jul"
-      when "08" then "Aug"
-      when "09" then "Sep"
-      when "10" then "Oct"
-      when "11" then "Nov"
-      when "12" then "Dec"
-  replaceCal = () ->
-    $('.cal-section p').each (index) ->
-      num = $(this).text()
-      month = ""
-      month = calCal(num)
-      $(this).text(month)
-  replaceCal()
+  oldFormatLocation = ".cal-section p"
+  replaceCal(oldFormatLocation)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # fadein and fadeout feature while scrolling
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -152,3 +115,42 @@ $(window).on "load", ->
       else if objectBottom < botBoundry and objectTop > topBoundry
         $(this).fadeTo(10,1) if ($(this).css("opacity")=="0")
 .scroll()
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# private functions
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+addList = (prependedList, prependLocation, userID) ->
+  $(prependLocation).append(formateCompletedTodo(prependedList, userID))
+removeTodos = (location) ->
+  $(location).children('.row').remove()
+formateCompletedTodo = (todo, userID) ->
+  '<div class="row">' +
+    '<a href="/users/' + userID + '/todos/' + todo.id + '" data-list-id="' + todo.id + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
+      '<span class="glyphicon glyphicon-ok-sign"></span>' + todo.title + '<span class="pull-right">' +
+        '<span class="glyphicon glyphicon-step-backward"></span>' +
+      '</span>' +
+    '</a>' +
+  '</div>'
+
+calCal = (month) ->
+  switch (month)
+    when "01" then "Jan"
+    when "02" then "Feb"
+    when "03" then "Mar"
+    when "04" then "Apr"
+    when "05" then "May"
+    when "06" then "Jun"
+    when "07" then "Jul"
+    when "08" then "Aug"
+    when "09" then "Sep"
+    when "10" then "Oct"
+    when "11" then "Nov"
+    when "12" then "Dec"
+
+replaceCal = (oldFormatLocation) ->
+  $('.cal-section p').each (index) ->
+    num = $(this).text()
+    month = ""
+    month = calCal(num)
+    $(this).text(month)
