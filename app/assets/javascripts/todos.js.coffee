@@ -2,10 +2,16 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+$(document).ready ->
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# change the format of the month from interger to abbreviation
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  oldFormatLocation = ".cal-section p"
+  replaceCal(oldFormatLocation)
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # gliphicon actions (edit, destroy, completed and uncompleted)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-$(document).ready ->
   $(".list-group").on "click", "span .glyphicon-edit", (event) ->
     event.preventDefault()
     list = $(this).closest('a')
@@ -18,12 +24,11 @@ $(document).ready ->
     list = $(this).closest('a')
     listID = $(list).data('listId')
     path = $(list).attr('href')
-    $.ajax({
+    $.ajax
       url: path
       method: 'DELETE'
       complete: ->
         $(list).parents('div .row').first().remove()
-    })
 
   $(".list-group").on "click", "span .glyphicon-ok", (event) ->
     event.preventDefault()
@@ -39,16 +44,15 @@ $(document).ready ->
                         '</span>' +
                       '</a>' +
                     '</div>'
-    $.ajax(
+    that = this
+    $.ajax
       url: path + '/completed'
       method: 'PUT'
       dataType: "json"
-      ).success((data) ->
-        $(list).removeClass('list-group-item-danger')
-        $(list).addClass('list-group-item-success')
+      success: (data) ->
+        $(that).closest(".row").remove()
         $('.recently-completed > div').last().remove()
         $('.recently-completed').prepend(completedList)
-      )
 
   $(".recently-completed").on "click", "span .glyphicon-step-backward", (event) ->
     event.preventDefault()
@@ -56,11 +60,11 @@ $(document).ready ->
     path = $(list).attr('href')
     userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
     prependLocation = $(".recently-completed")
-    $.ajax(
+    $.ajax
       url: path + '/uncompleted'
       method: 'PUT'
       dataType: "json"
-      ).success((data) ->
+      success: (data) ->
         uncompletedList = '<div class="row uncompleted-todos">' +
                             '<a href="/users/' + data["todo"].user_id + '/todos/' + data["todo"].id + '" data-list-id="' + data["todo"].id + '">' +
                               data["todo"].title +
@@ -76,21 +80,16 @@ $(document).ready ->
 # remove todo from the completed list and append the new recently
 # completed todos to completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-        debugger
         removeTodos(prependLocation)
-        addList prependedList, prependLocation, userID for prependedList in data["completed_todos"]
+        for prependedList in data["completed_todos"]
+          addList prependedList, prependLocation, userID
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # add a todo back to uncompleted list and apply css
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
         $(uncompletedTodos).after(uncompletedList)
         $(uncompletedTodos).next().children('a').addClass(classAttr)
-      )
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# change the format of the month from interger to abbreviation
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  oldFormatLocation = ".cal-section p"
-  replaceCal(oldFormatLocation)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # fadein and fadeout feature while scrolling
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -116,7 +115,6 @@ $(window).on "load", ->
       else if objectBottom < botBoundry and objectTop > topBoundry
         $(this).fadeTo(10,1) if ($(this).css("opacity")=="0")
 .scroll()
-
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # private functions
