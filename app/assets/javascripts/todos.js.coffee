@@ -76,6 +76,7 @@ $(document).ready ->
 # remove todo from the completed list and append the new recently
 # completed todos to completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        debugger
         removeTodos(prependLocation)
         addList prependedList, prependLocation, userID for prependedList in data["completed_todos"]
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -149,7 +150,7 @@ calCal = (month) ->
     when "12" then "Dec"
 
 replaceCal = (oldFormatLocation) ->
-  $('.cal-section p').each (index) ->
+  $(oldFormatLocation).each (index) ->
     num = $(this).text()
     month = ""
     month = calCal(num)
