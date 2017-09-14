@@ -58,9 +58,13 @@ class TodosController < ApplicationController
     def uncompleted
       @todo = Todo.find_by_id(params[:id])
       @todo.is_uncompleted
+      todos = Todo.check_overdued(params[:user_id])
+      completed_todos = todos.select { |todo| todo.completed == true }
+      recent_todos = completed_todos.sort_by(&:updated_at).reverse!.take(3)
       respond_to do |format|
         format.html { redirect_to "/users/#{params[:user_id]}/todos/#{params[:id]}" }
-        format.json { render json: @todo.as_json(root: false) }
+        # format.json { render json: { "todo" => @todo.as_json(root: false)}.as_json}
+        format.json { render json: { "todo" => @todo.as_json(root: false), "completed_todos" => recent_todos.as_json} }
       end
     end
 

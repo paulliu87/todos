@@ -32,7 +32,7 @@ $(document).ready ->
     listTitle = list.text().trim()
     path = $(list).attr('href')
     userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
-    completedList = '<div class="row" style="margin-top: 0.1em">' +
+    completedList = '<div class="row">' +
                       '<a href="/users/' + userID + '/todos/' + listID + '" data-list-id="' + listID + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
                         '<span class="glyphicon glyphicon-ok-sign"></span>' + listTitle + '<span class="pull-right">' +
                           '<span class="glyphicon glyphicon-step-backward"></span>' +
@@ -54,28 +54,45 @@ $(document).ready ->
     event.preventDefault()
     list = $(this).closest('a')
     path = $(list).attr('href')
-    that = this
+    userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
+    prependLocation = $(".recently-completed")
     $.ajax(
       url: path + '/uncompleted'
       method: 'PUT'
       dataType: "json"
       ).success((data) ->
-        uncompletedList = '<div class="row uncompleted-todos" style="margin-top: 0.1em">' +
-                            '<a href="/users/' + data.user_id + '/todos/' + data.id + '" data-list-id="' + data.id + '">' +
-                              data.title +
+        uncompletedList = '<div class="row uncompleted-todos">' +
+                            '<a href="/users/' + data["todo"].user_id + '/todos/' + data["todo"].id + '" data-list-id="' + data["todo"].id + '">' +
+                              data["todo"].title +
                               '<span class="pull-right">' +
                                 '<span class="glyphicon glyphicon-edit"></span>' +
                                 '<span class="glyphicon glyphicon-trash"></span>' +
                                 '<span class="glyphicon glyphicon-ok"></span></span><br><span>' +
-                                data.deadline + '</span></a></div>'
-        date = data.deadline.substring(0,10)
+                                data["todo"].deadline + '</span></a></div>'
+        date = data["todo"].deadline.substring(0,10)
         uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
         classAttr = $(uncompletedTodos).next().children('a').attr("class")
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# remove todo from the completed list and append the 4th recently
-# completed todo to completed list
+# remove todo from the completed list and append the new recently
+# completed todos to completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-        $("a[data-list-id=" + data.id + "]").parent().remove()
+        addList = (prependedList, prependLocation, userID) ->
+          $(prependLocation).append(formateList(prependedList, userID))
+        removeTodos = (location) ->
+          $(location).children('.row').remove()
+        formateList = (todo, userID) ->
+          '<div class="row">' +
+            '<a href="/users/' + userID + '/todos/' + todo.id + '" data-list-id="' + todo.id + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
+              '<span class="glyphicon glyphicon-ok-sign"></span>' + todo.title + '<span class="pull-right">' +
+                '<span class="glyphicon glyphicon-step-backward"></span>' +
+              '</span>' +
+            '</a>' +
+          '</div>'
+        # userID = window.location.pathname.match(/^\/users\/(\d+)/)[1]
+        # prependLocation = $(".recently-completed")
+        removeTodos(prependLocation)
+        addList prependedList, prependLocation, userID for prependedList in data["completed_todos"]
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # add a todo back to uncompleted list and apply css
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
