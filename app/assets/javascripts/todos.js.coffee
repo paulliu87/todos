@@ -45,13 +45,15 @@ $(document).ready ->
                       '</a>' +
                     '</div>'
     that = this
+    completedTodosLength = $('.recently-completed > div').length
     $.ajax
       url: path + '/completed'
       method: 'PUT'
       dataType: "json"
       success: (data) ->
         $(that).closest(".row").remove()
-        $('.recently-completed > div').last().remove()
+        if completedTodosLength >= 3
+          $('.recently-completed > div').last().remove()
         $('.recently-completed').prepend(completedList)
 
   $(".recently-completed").on "click", "span .glyphicon-step-backward", (event) ->
@@ -65,30 +67,35 @@ $(document).ready ->
       method: 'PUT'
       dataType: "json"
       success: (data) ->
-        uncompletedList = '<div class="row uncompleted-todos">' +
-                            '<a href="/users/' + data["todo"].user_id + '/todos/' + data["todo"].id + '" data-list-id="' + data["todo"].id + '">' +
-                              data["todo"].title +
-                              '<span class="pull-right">' +
-                                '<span class="glyphicon glyphicon-edit"></span>' +
-                                '<span class="glyphicon glyphicon-trash"></span>' +
-                                '<span class="glyphicon glyphicon-ok"></span></span><br><span>' +
-                                data["todo"].deadline + '</span></a></div>'
-        date = data["todo"].deadline.substring(0,10)
-        uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
-        classAttr = $(uncompletedTodos).next().children('a').attr("class")
+        # uncompletedTodo = formateUncompletedTodo(data["todo"])
+        # uncompletedTodo = '<div class="row uncompleted-todos">' +
+        #                     '<a href="/users/' + data["todo"].user_id + '/todos/' + data["todo"].id + '" data-list-id="' + data["todo"].id + '">' +
+        #                       data["todo"].title +
+        #                       '<span class="pull-right">' +
+        #                         '<span class="glyphicon glyphicon-edit"></span>' +
+        #                         '<span class="glyphicon glyphicon-trash"></span>' +
+        #                         '<span class="glyphicon glyphicon-ok"></span></span><br><span>' +
+        #                         data["todo"].deadline + '</span></a></div>'
+        # date = data["todo"].deadline.substring(0,10)
+        # if $("time[data-calendar-id=" + date + "]") == 1
+        #   uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
+        # else
+        #
+        # classAttr = $(uncompletedTodos).next().children('a').attr("class")
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # remove todo from the completed list and append the new recently
 # completed todos to completed list
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
         removeTodos(prependLocation)
         for prependedList in data["completed_todos"]
-          addList prependedList, prependLocation, userID
+          addList prependedList, prependLocation
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # add a todo back to uncompleted list and apply css
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-        $(uncompletedTodos).after(uncompletedList)
-        $(uncompletedTodos).next().children('a').addClass(classAttr)
+        uncompleteTodo(data["todo"])
+        # $(uncompletedTodos).after(uncompletedTodo)
+        # $(uncompletedTodos).next().children('a').addClass(classAttr)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # fadein and fadeout feature while scrolling
@@ -119,18 +126,41 @@ $(window).on "load", ->
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # private functions
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-addList = (prependedList, prependLocation, userID) ->
-  $(prependLocation).append(formateCompletedTodo(prependedList, userID))
+addList = (prependedList, prependLocation) ->
+  $(prependLocation).append(formateCompletedTodo(prependedList))
 removeTodos = (location) ->
   $(location).children('.row').remove()
-formateCompletedTodo = (todo, userID) ->
+formateCompletedTodo = (todo) ->
   '<div class="row">' +
-    '<a href="/users/' + userID + '/todos/' + todo.id + '" data-list-id="' + todo.id + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
+    '<a href="/users/' + todo.user_id + '/todos/' + todo.id + '" data-list-id="' + todo.id + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
       '<span class="glyphicon glyphicon-ok-sign"></span>' + todo.title + '<span class="pull-right">' +
         '<span class="glyphicon glyphicon-step-backward"></span>' +
       '</span>' +
     '</a>' +
   '</div>'
+
+formateUncompletedTodo = (todo) ->
+  '<div class="row uncompleted-todos">' +
+  '<a href="/users/' + todo.user_id + '/todos/' + todo.id + '" data-list-id="' + todo.id + '">' +
+  todo.title +
+  '<span class="pull-right">' +
+  '<span class="glyphicon glyphicon-edit"></span>' +
+  '<span class="glyphicon glyphicon-trash"></span>' +
+  '<span class="glyphicon glyphicon-ok"></span></span><br><span>' +
+  todo.deadline + '</span></a></div>'
+
+uncompleteTodo = (todo) ->
+  uncompletedTodo = formateUncompletedTodo(todo)
+    date = todo.deadline.substring(0,10)
+    if $("time[data-calendar-id=" + date + "]") == 1
+      uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
+    else
+      position = findposition(todo)
+      
+
+    classAttr = $(uncompletedTodos).next().children('a').attr("class")
+    $(uncompletedTodos).after(uncompletedTodo)
+    $(uncompletedTodos).next().children('a').addClass(classAttr)
 
 calCal = (month) ->
   switch (month)
