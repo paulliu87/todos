@@ -155,13 +155,24 @@ uncompleteTodo = (todo) ->
     if $("time[data-calendar-id=" + date + "]") == 1
       uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
     else
-      position = findposition(todo)
-      
+      position = findPosition(todo)
+
 
     classAttr = $(uncompletedTodos).next().children('a').attr("class")
     $(uncompletedTodos).after(uncompletedTodo)
     $(uncompletedTodos).next().children('a').addClass(classAttr)
 
+findPosition = (todo) ->
+  insertTodoDate = todo.deadline
+  if existedInDOM ("item")
+    $("time").each ->
+      currentDate = $(this).attr("data-calendar-id")
+      if currentDate > insertTodoDate
+        return $(this).closest(".row")
+      else
+        continue
+  else
+    $(".list-group")
 calCal = (month) ->
   switch (month)
     when "01" then "Jan"
@@ -183,3 +194,5 @@ replaceCal = (oldFormatLocation) ->
     month = ""
     month = calCal(num)
     $(this).text(month)
+existedInDOM = (item) ->
+  $(item) == 1
