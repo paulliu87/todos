@@ -149,30 +149,33 @@ formateUncompletedTodo = (todo) ->
   '<span class="glyphicon glyphicon-ok"></span></span><br><span>' +
   todo.deadline + '</span></a></div>'
 
+formatCalendarHeader = (todo) ->
+  '<div class="row calendar-header">' +
+      '<div class="cal-section col-md-1">' +
+        '<time class="icon" data-calendar-id="' + todo.deadline.substring(0,10) + '">' +
+          '<p>' + todo.deadline.substring(5,6) + '</p>' +
+          '<div class="cal-top"></div>' +
+          '<span>' + todo.deadline.substring(8,9) + ' %></span>' +
+      '</time>' +
+      '</div>' +
+      '<img src="/images/summer.jpg"  class="pull-right col-md-10 img-reponsive img-rounded list-group-item list-group-item-action clearfix" />' +
+  '</div>'
+
 uncompleteTodo = (todo) ->
-  uncompletedTodo = formateUncompletedTodo(todo)
-    date = todo.deadline.substring(0,10)
-    if $("time[data-calendar-id=" + date + "]") == 1
-      uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
-    else
-      position = findPosition(todo)
-
-
-    classAttr = $(uncompletedTodos).next().children('a').attr("class")
-    $(uncompletedTodos).after(uncompletedTodo)
-    $(uncompletedTodos).next().children('a').addClass(classAttr)
+  position = findPosition(todo)
+  insertTodo(todo, position)
+  applyClass(todo, position)
 
 findPosition = (todo) ->
-  insertTodoDate = todo.deadline
-  if existedInDOM ("item")
-    $("time").each ->
+  insertTodoDate = todo.deadline.substring(0,10)
+  if existedInDOM(insertTodoDate)
+    $(insertTodoDate).each ->
       currentDate = $(this).attr("data-calendar-id")
       if currentDate > insertTodoDate
         return $(this).closest(".row")
-      else
-        continue
   else
     $(".list-group")
+
 calCal = (month) ->
   switch (month)
     when "01" then "Jan"
@@ -194,5 +197,20 @@ replaceCal = (oldFormatLocation) ->
     month = ""
     month = calCal(num)
     $(this).text(month)
-existedInDOM = (item) ->
-  $(item) == 1
+
+existedInDOM = (date) ->
+  $("time[data-calendar-id=" + date + "]") == 1
+
+insertTodo = (todo, position) ->
+  calendarHeader = formatCalendarHeader(todo)
+  uncompletedTodo = formateUncompletedTodo(todo)
+  if existedInDOM(todo.deadline.substring(0,10))
+    $(uncompletedTodo).insertBefore(position)
+  else
+    $(calendarHeader).insertBefore(position)
+    $(uncompletedTodo).insertBefore(position)
+
+applyClass(todo, position)
+  classAttr = $(uncompletedTodos).next().children('a').attr("class")
+  $(uncompletedTodos).after(uncompletedTodo)
+  $(uncompletedTodos).next().children('a').addClass(classAttr)
