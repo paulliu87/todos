@@ -3,15 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# change the format of the month from interger to abbreviation
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # change the format of the month from interger to abbreviation
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   oldFormatLocation = ".cal-section p"
   replaceCal(oldFormatLocation)
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# gliphicon actions (edit, destroy, completed and uncompleted)
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # gliphicon actions (edit, destroy, completed and uncompleted)
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   $(".list-group").on "click", "span .glyphicon-edit", (event) ->
     event.preventDefault()
     list = $(this).closest('a')
@@ -67,35 +67,18 @@ $(document).ready ->
       method: 'PUT'
       dataType: "json"
       success: (data) ->
-        # uncompletedTodo = formateUncompletedTodo(data["todo"])
-        # uncompletedTodo = '<div class="row uncompleted-todos">' +
-        #                     '<a href="/users/' + data["todo"].user_id + '/todos/' + data["todo"].id + '" data-list-id="' + data["todo"].id + '">' +
-        #                       data["todo"].title +
-        #                       '<span class="pull-right">' +
-        #                         '<span class="glyphicon glyphicon-edit"></span>' +
-        #                         '<span class="glyphicon glyphicon-trash"></span>' +
-        #                         '<span class="glyphicon glyphicon-ok"></span></span><br><span>' +
-        #                         data["todo"].deadline + '</span></a></div>'
-        # date = data["todo"].deadline.substring(0,10)
-        # if $("time[data-calendar-id=" + date + "]") == 1
-        #   uncompletedTodos = $("time[data-calendar-id=" + date + "]").parents(".calendar-header")
-        # else
-        #
-        # classAttr = $(uncompletedTodos).next().children('a').attr("class")
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# remove todo from the completed list and append the new recently
-# completed todos to completed list
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        # remove todo from the completed list and append the new recently
+        # completed todos to completed list
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
         removeTodos(prependLocation)
         for prependedList in data["completed_todos"]
           addList prependedList, prependLocation
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# add a todo back to uncompleted list and apply css
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        # add a todo back to uncompleted list and apply css
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
         uncompleteTodo(data["todo"])
-        # $(uncompletedTodos).after(uncompletedTodo)
-        # $(uncompletedTodos).next().children('a').addClass(classAttr)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # fadein and fadeout feature while scrolling
@@ -107,16 +90,16 @@ $(window).on "load", ->
     $(".row").each ->
       objectBottom = $(this).offset().top + $(this).outerHeight()
       objectTop = $(this).offset().top
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# bottom todo fadein and fadeout
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+      # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+      # bottom todo fadein and fadeout
+      # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
       if objectBottom < botBoundry and objectTop > topBoundry
         $(this).fadeTo(200,1) if ($(this).css("opacity")=="0")
       else if objectBottom > botBoundry and objectTop > topBoundry
         $(this).fadeTo(200,0) if ($(this).css("opacity")=="1")
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# top todo fadein and fadeout
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+      # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+      # top todo fadein and fadeout
+      # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
       else if objectBottom < botBoundry and objectTop < topBoundry
         $(this).fadeTo(10,0) if ($(this).css("opacity")=="1")
       else if objectBottom < botBoundry and objectTop > topBoundry
@@ -130,6 +113,7 @@ addList = (prependedList, prependLocation) ->
   $(prependLocation).append(formateCompletedTodo(prependedList))
 removeTodos = (location) ->
   $(location).children('.row').remove()
+
 formateCompletedTodo = (todo) ->
   '<div class="row">' +
     '<a href="/users/' + todo.user_id + '/todos/' + todo.id + '" data-list-id="' + todo.id + '" class="list-group-item list-group-item-action clearfix list-group-item-success">' +
@@ -153,9 +137,9 @@ formatCalendarHeader = (todo) ->
   '<div class="row calendar-header">' +
       '<div class="cal-section col-md-1">' +
         '<time class="icon" data-calendar-id="' + todo.deadline.substring(0,10) + '">' +
-          '<p>' + todo.deadline.substring(5,6) + '</p>' +
+          '<p>' + todo.deadline.substring(5,7) + '</p>' +
           '<div class="cal-top"></div>' +
-          '<span>' + todo.deadline.substring(8,9) + ' %></span>' +
+          '<span>' + todo.deadline.substring(8,10) + '</span>' +
       '</time>' +
       '</div>' +
       '<img src="/images/summer.jpg"  class="pull-right col-md-10 img-reponsive img-rounded list-group-item list-group-item-action clearfix" />' +
@@ -168,13 +152,16 @@ uncompleteTodo = (todo) ->
 
 findPosition = (todo) ->
   insertTodoDate = todo.deadline.substring(0,10)
+  basePosition
   if existedInDOM(insertTodoDate)
-    $(insertTodoDate).each ->
+    basePosition = $("time[data-calendar-id=" + insertTodoDate + "]").closest('.row').next()
+  else
+    $("time").each ->
       currentDate = $(this).attr("data-calendar-id")
       if currentDate > insertTodoDate
-        return $(this).closest(".row")
-  else
-    $(".list-group")
+        basePosition = $(this).closest(".row")
+        return false
+  return basePosition
 
 calCal = (month) ->
   switch (month)
@@ -192,14 +179,14 @@ calCal = (month) ->
     when "12" then "Dec"
 
 replaceCal = (oldFormatLocation) ->
-  $(oldFormatLocation).each (index) ->
+  $(oldFormatLocation).each ->
     num = $(this).text()
     month = ""
     month = calCal(num)
     $(this).text(month)
 
 existedInDOM = (date) ->
-  $("time[data-calendar-id=" + date + "]") == 1
+  $("time[data-calendar-id=" + date + "]").length == 1
 
 insertTodo = (todo, position) ->
   calendarHeader = formatCalendarHeader(todo)
@@ -209,8 +196,21 @@ insertTodo = (todo, position) ->
   else
     $(calendarHeader).insertBefore(position)
     $(uncompletedTodo).insertBefore(position)
+  curMonthLocation = $("time[data-calendar-id=" + todo.deadline.substring(0,10) + "]").children('p')
+  replaceCal(curMonthLocation)
 
-applyClass(todo, position)
-  classAttr = $(uncompletedTodos).next().children('a').attr("class")
-  $(uncompletedTodos).after(uncompletedTodo)
-  $(uncompletedTodos).next().children('a').addClass(classAttr)
+applyClass = (todo, position) ->
+  if isOverDue(todo)
+    $(position).prev().children('a').addClass("pull-right col-md-10 list-group-item list-group-item-action clearfix list-group-item-danger")
+  else
+    $(position).prev().children('a').addClass("pull-right col-md-10 list-group-item list-group-item-action clearfix")
+
+isOverDue = (todo) ->
+  curTime = new Date()
+  offset = new Date().getTimezoneOffset()
+  todoDeadline = new Date(todo.deadline.substring(0,10))
+  todoDeadline < curTime.addHours(offset / 60)
+
+Date.prototype.addHours = (h) ->
+  this.setTime(this.getTime() + (h*60*60*1000))
+  this
