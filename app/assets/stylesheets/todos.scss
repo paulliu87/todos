@@ -146,7 +146,7 @@ span .glyphicon-ok{
   margin-right: 0;
 }
 
-.calendar-header {
+.ar-header {
   margin-top: 2px;
 }
 
@@ -167,4 +167,108 @@ span .glyphicon-ok{
   max-height: 60px;
   max-width: auto;
   padding: 0px;
+}
+
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+/* Month header */
+.month {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid white;
+    padding: 10px 25px;
+    width: 100%;
+    background: white;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+/* Month list */
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: #2BD6FA;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+/* Next button */
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+    margin-bottom: 2px;
+    padding: 10px 0;
+    background-color: white;
+
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13%;
+    color: #666;
+    text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+    text-align: center;
+    padding: 0 0;
+    background: transparent;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.22%;
+    text-align: center;
+    margin-bottom: 2px;
+    font-size:12px;
+    color:#777;
+    padding: 10px 10px;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid white;
+}
+
+/* Highlight the "current" day */
+.days .active {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.05%;
+    text-align: center;
+    margin-bottom: 2px;
+    font-size:12px;
+    padding: 10px 10px;
+    background: white;
+    background: #2BD6FA;
+    color: white !important
+}
+
+.calendar {
+  margin-top: 270px;
+  top: 2px;
+  right: 3%;
+  // height: auto;
+  // width: 325px;
+  position: fixed;
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+
 }

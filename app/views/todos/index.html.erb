@@ -1,6 +1,9 @@
 <% content_for(:sidebar) do %>
   <%= render :partial => "layouts/sidebar" %>
 <% end %>
+<% content_for(:calendar) do %>
+  <%= render :partial => "layouts/calendar" %>
+<% end %>
 <div class="list-group">
   <% if @todos != nil %>
     <% @todos.each do |key, value| %>
