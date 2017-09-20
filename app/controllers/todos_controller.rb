@@ -20,6 +20,7 @@ class TodosController < ApplicationController
         completed_todos = todos.select { |todo| todo.completed == true }
         @recent_todos = completed_todos.sort_by(&:updated_at).reverse!.take(3)
       end
+      @date = Date.today
     end
 
     def show
