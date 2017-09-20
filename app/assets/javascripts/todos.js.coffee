@@ -83,19 +83,15 @@ $(document).ready ->
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   # scroll to specific date
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
   $('.calendar .days').on "click", "li", (event) ->
     console.log($(this).text())
     date = findDate(this)
     calendarRow = $("time[data-calendar-id=" + date + "]")
-    $('.content').animate ->
-      scrollTop: $(calendarRow).offset().top
-    , 2000
+    prevRow = $(calendarRow).parents('.row').prev().prev()
+    $('html,body').animate {
+      scrollTop: $(prevRow).offset().top
+    }, 1000
 
-
-    # $('html, body').animate({
-    #     scrollTop: $("#elementtoScrollToID").offset().top
-    # }, 2000);
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # fadein and fadeout feature while scrolling
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -254,8 +250,6 @@ findDate = (element) ->
   monthStart = $(temp).children('.month').clone().children().children().last().text().trim().length
   defaultMonth = reverseCal($(temp).children('.month').clone().children().children().last().text().trim().substring(0,monthStart - 4).trim())
   searchParams = new URLSearchParams(document.location.search.substring(1))
-  searchDate = searchParams.get("date")
-  # YYMMDD = window.location.search ? searchDate : (defaultYear + "-" + defaultMonth + "-" + date)
+  searchDate = searchParams.get("date").substring(0,8) + date
   YYMMDD = if window.location.search then searchDate else defaultYear + "-" + defaultMonth + "-" + date
-  console.log(YYMMDD)
   YYMMDD
