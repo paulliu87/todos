@@ -80,6 +80,22 @@ $(document).ready ->
         # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
         uncompleteTodo(data["todo"])
 
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  # scroll to specific date
+  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+  $('.calendar .days').on "click", "li", (event) ->
+    console.log($(this).text())
+    date = findDate(this)
+    calendarRow = $("time[data-calendar-id=" + date + "]")
+    $('.content').animate ->
+      scrollTop: $(calendarRow).offset().top
+    , 2000
+
+
+    # $('html, body').animate({
+    #     scrollTop: $("#elementtoScrollToID").offset().top
+    # }, 2000);
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # fadein and fadeout feature while scrolling
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -178,6 +194,21 @@ calCal = (month) ->
     when "11" then "Nov"
     when "12" then "Dec"
 
+reverseCal = (month) ->
+  switch (month)
+    when "January" then "01"
+    when "Febuary" then "02"
+    when "March" then "03"
+    when "April" then "04"
+    when "May" then "05"
+    when "June" then "06"
+    when "July" then "07"
+    when "August" then "08"
+    when "September" then "09"
+    when "OctoberR" then "10"
+    when "November" then "11"
+    when "December" then "12"
+
 replaceCal = (oldFormatLocation) ->
   $(oldFormatLocation).each ->
     num = $(this).text()
@@ -214,3 +245,17 @@ isOverDue = (todo) ->
 Date.prototype.addHours = (h) ->
   this.setTime(this.getTime() + (h*60*60*1000))
   this
+
+findDate = (element) ->
+  date = $(element).text().trim()
+  temp = $(element).parents()[1]
+  yearStart = $(temp).children('.month').text().trim().length
+  defaultYear = $(temp).children('.month').text().trim().substring(yearStart - 4)
+  monthStart = $(temp).children('.month').clone().children().children().last().text().trim().length
+  defaultMonth = reverseCal($(temp).children('.month').clone().children().children().last().text().trim().substring(0,monthStart - 4).trim())
+  searchParams = new URLSearchParams(document.location.search.substring(1))
+  searchDate = searchParams.get("date")
+  # YYMMDD = window.location.search ? searchDate : (defaultYear + "-" + defaultMonth + "-" + date)
+  YYMMDD = if window.location.search then searchDate else defaultYear + "-" + defaultMonth + "-" + date
+  console.log(YYMMDD)
+  YYMMDD
