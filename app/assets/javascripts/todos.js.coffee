@@ -86,11 +86,14 @@ $(document).ready ->
   $('.calendar .days').on "click", "li", (event) ->
     console.log($(this).text())
     date = findDate(this)
-    calendarRow = $("time[data-calendar-id=" + date + "]")
-    prevRow = $(calendarRow).parents('.row').prev().prev()
-    $('html,body').animate {
-      scrollTop: $(prevRow).offset().top
-    }, 1000
+    if existedInDOM(date)
+      calendarRow = $("time[data-calendar-id=" + date + "]")
+      prevRow = $(calendarRow).parents('.row').prev().prev()
+      $('html,body').animate {
+        scrollTop: $(prevRow).offset().top
+      }, 1000
+    # else
+      # display a messages and ask to create one todo
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # fadein and fadeout feature while scrolling
@@ -243,7 +246,7 @@ Date.prototype.addHours = (h) ->
   this
 
 findDate = (element) ->
-  date = $(element).text().trim()
+  date = if $(element).text().trim().length == 2 then $(element).text().trim() else "0" + $(element).text().trim()
   temp = $(element).parents()[1]
   yearStart = $(temp).children('.month').text().trim().length
   defaultYear = $(temp).children('.month').text().trim().substring(yearStart - 4)
@@ -252,4 +255,3 @@ findDate = (element) ->
   searchParams = new URLSearchParams(document.location.search.substring(1))
   searchDate = searchParams.get("date").substring(0,8) + date
   YYMMDD = if window.location.search then searchDate else defaultYear + "-" + defaultMonth + "-" + date
-  YYMMDD

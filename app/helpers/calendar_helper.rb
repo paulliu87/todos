@@ -34,7 +34,8 @@ module CalendarHelper
     def day_classes(day)
       classes = []
       classes << "today" if day == Date.today
-      classes << "notmonth" if day.month != date.month
+      classes << "prevmonth" if day.month < date.month
+      classes << "nextmonth" if day.month > date.month
       classes.empty? ? nil : classes.join(" ")
     end
 
