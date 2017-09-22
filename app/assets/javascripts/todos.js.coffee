@@ -84,7 +84,6 @@ $(document).ready ->
   # scroll to specific date
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   $('.calendar .days').on "click", "li", (event) ->
-    console.log($(this).text())
     date = findDate(this)
     if existedInDOM(date)
       calendarRow = $("time[data-calendar-id=" + date + "]")
@@ -204,7 +203,7 @@ reverseCal = (month) ->
     when "July" then "07"
     when "August" then "08"
     when "September" then "09"
-    when "OctoberR" then "10"
+    when "October" then "10"
     when "November" then "11"
     when "December" then "12"
 
@@ -246,12 +245,35 @@ Date.prototype.addHours = (h) ->
   this
 
 findDate = (element) ->
+  searchDate = getSearchDate(element)
+  searchMonth = getSearchMonth(element)
+  searchYear = getSearchYear(element)
+  YYMMDD = searchYear + "-" + searchMonth + "-" + searchDate
+getSearchDate = (element) ->
   date = if $(element).text().trim().length == 2 then $(element).text().trim() else "0" + $(element).text().trim()
-  temp = $(element).parents()[1]
-  yearStart = $(temp).children('.month').text().trim().length
-  defaultYear = $(temp).children('.month').text().trim().substring(yearStart - 4)
-  monthStart = $(temp).children('.month').clone().children().children().last().text().trim().length
-  defaultMonth = reverseCal($(temp).children('.month').clone().children().children().last().text().trim().substring(0,monthStart - 4).trim())
-  searchParams = new URLSearchParams(document.location.search.substring(1))
-  searchDate = searchParams.get("date").substring(0,8) + date
-  YYMMDD = if window.location.search then searchDate else defaultYear + "-" + defaultMonth + "-" + date
+getSearchMonth = (element) ->
+  parentDiv = $(element).parents()[1]
+  startIndex = $(parentDiv).children('.month').clone().children().children().last().text().trim().length
+  defaultMonth = reverseCal($(parentDiv).children('.month').clone().children().children().last().text().trim().substring(0,startIndex - 4).trim())
+  if $(element).hasClass("prevmonth") and defaultMonth == "01"
+    "12"
+  else if $(element).hasClass("prevmonth")
+    (parseInt(defaultMonth) - 1).toString()
+  else if $(element).hasClass("nextmonth") and defaultMonth == "12"
+    "01"
+  else if $(element).hasClass("nextmonth")
+    (parseInt(defaultMonth) + 1).toString()
+  else
+    defaultMonth
+getSearchYear = (element) ->
+  parentDiv = $(element).parents()[1]
+  startIndex = $(parentDiv).children('.month').text().trim().length
+  startIndexMonth = $(parentDiv).children('.month').clone().children().children().last().text().trim().length
+  currentMonth = reverseCal($(parentDiv).children('.month').clone().children().children().last().text().trim().substring(0,startIndexMonth - 4).trim())
+  defaultYear = $(parentDiv).children('.month').text().trim().substring(startIndex - 4)
+  if $(element).hasClass("prevmonth") and currentMonth == "01"
+    (parseInt(defaultYear) - 1).toString()
+  else if $(element).hasClass("nextmonth") and currentMonth == "12"
+    (parseInt(defaultYear) + 1).toString()
+  else
+    defaultYear
