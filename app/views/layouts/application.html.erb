@@ -33,7 +33,7 @@
           <% end %>
         </ul>
         <% if session[:user_id] %>
-          <%= form_tag(user_todos_path, :action => "index", :method => "get", :id => "search-form", :class => "form-inline") do %>
+          <%= form_tag(user_todos_path, :action => "index", :method => "get", :user_id => session[:user_id], :id => "search-form", :class => "form-inline") do %>
             <div class="input-group">
               <%= text_field_tag :search, params[:search], placeholder: "Search Todos", class: "form-control" %>
               <span class="input-group-btn"><%= submit_tag "Search", :class => "btn btn-default" %></span>
