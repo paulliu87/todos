@@ -3,39 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //searchbar style
-// input[type=text] {
-//   width: 130px;
-//   box-sizing: border-box;
-//   border: 2px solid #ccc;
-//   border-radius: 4px;
-//   font-size: 16px;
-//   background-color: white;
-//   // background-image: url('searchicon.png');
-//   background-position: 10px 10px;
-//   background-repeat: no-repeat;
-//   padding: 12px 20px 12px 40px;
-//   -webkit-transition: width 0.4s ease-in-out;
-//   transition: width 0.4s ease-in-out;
-// }
-//
-// /* When the input field gets focus, change its width to 100% */
-// input[type=text]:focus {
-//     width: 100%;
-// }
 #search-form {
-  // text-align: center;
   vertical-align: middle;
   padding-top: 7px;
 }
 
 #search:focus {
   width: 200%;
-  // background-color: white;
-  // color: black;
 }
 #search:focus + .input-group-btn {
   padding-left: 192px;
-  // background-color: red;
 }
 .input-group-btn {
   -webkit-transition: padding-left 0.4s ease-in-out;
