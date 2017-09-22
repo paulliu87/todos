@@ -13,6 +13,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/">TODOs</a>
                 </div>
+
                 <ul class="nav navbar-nav navbar-right">
                     <% if session[:user_id] %>
                         <li>
@@ -33,6 +34,10 @@
                         </li>
                     <% end %>
                 </ul>
+                <%= form_tag(user_todos_path, :action => "index", :method => "get", id: "search-form") do %>
+                  <%= text_field_tag :search, params[:search], placeholder: "Search Todos" %>
+                  <%= submit_tag "Search" %>
+                <% end %>
             </div>
         </nav>
         <div class="container">

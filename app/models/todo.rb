@@ -27,4 +27,8 @@ class Todo < ApplicationRecord
   def is_uncompleted
     self.update(completed: false)
   end
+
+  def self.search(search)
+    where("title LIKE ? OR detail LIKE ?", "%#{search}%", "%#{search}%")
+  end
 end
