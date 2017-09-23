@@ -7,7 +7,7 @@ class Todo < ApplicationRecord
     self.overdue ||= false         #will set the default value only if it's nil
   end
 
-  def self.check_overdued(user_id)
+  def self.check_overdue(user_id)
     todos = []
     all_todos = User.find(user_id).todos
     all_todos.each do |todo|
@@ -28,7 +28,13 @@ class Todo < ApplicationRecord
     self.update(completed: false)
   end
 
-  def self.search(search)
-    where("title LIKE ? OR detail LIKE ?", "%#{search}%", "%#{search}%")
+  def search(search)
+    todos = []
+    self.each do |todo|
+      if todo[:title].include?(search) || todo[:detail].include?(search)
+        todos.push(todo)
+      end
+    end
+    todos.sort_by(&:deadline)
   end
 end
