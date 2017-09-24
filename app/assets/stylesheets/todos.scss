@@ -324,7 +324,7 @@ body {font-family: Verdana, sans-serif;}
 
 }
 
-@media screen and (max-width: 1021px) {
+@media screen and (min-device-width: 0px) and (max-device-width: 1221px) {
   .sidebar {
     visibility: hidden;
     clear: both;
