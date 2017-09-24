@@ -27,14 +27,4 @@ class Todo < ApplicationRecord
   def is_uncompleted
     self.update(completed: false)
   end
-
-  def search(search)
-    todos = []
-    self.each do |todo|
-      if todo[:title].include?(search) || todo[:detail].include?(search)
-        todos.push(todo)
-      end
-    end
-    todos.sort_by(&:deadline)
-  end
 end

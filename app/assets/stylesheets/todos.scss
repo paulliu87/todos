@@ -203,6 +203,8 @@ span .glyphicon-ok{
   margin-top: 2px;
 }
 
+
+
 .sidebar h3 {
   color: transparent;
   text-shadow: -1px 0 transparent, 0 1px transparent, 1px 0 transparent, 0 -1px white;
@@ -320,4 +322,30 @@ body {font-family: Verdana, sans-serif;}
   padding-left: 0;
   padding-right: 0;
 
+}
+
+@media screen and (max-width: 1021px) {
+  .sidebar {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+  .calendar {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+  .content {
+    text-align: middle;
+  }
+  div .cal-section {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
