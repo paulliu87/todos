@@ -15,12 +15,12 @@
             <span><%= key.to_s[8..9] %></span>
           </time>
         </div>
-        <img src="/images/summer.jpg"  class="pull-right col-md-10 col-xs-10 img-reponsive img-rounded list-group-item list-group-item-action clearfix" />
+        <img src="/images/summer.jpg"  class="pull-right col-md-10 col-xs-9 img-reponsive img-rounded list-group-item list-group-item-action clearfix" />
       </div>
       <% value.each do |todo| %>
         <div class="row uncompleted-todos">
           <% if todo.overdue %>
-            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 col-xs-10 list-group-item list-group-item-action clearfix list-group-item-danger">
+            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 col-xs-9 list-group-item list-group-item-action clearfix list-group-item-danger">
               <%= todo.title %>
               <span class="pull-right">
                 <span class="glyphicon glyphicon-edit"></span>
@@ -36,7 +36,7 @@
               </span>
             </a>
           <% else %>
-            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 col-xs-10 list-group-item list-group-item-action clearfix">
+            <a href="/users/<%= params[:user_id] %>/todos/<%= todo.id %>" data-list-id="<%= todo.id %>" class="pull-right col-md-10 col-xs-9 list-group-item list-group-item-action clearfix">
               <%= todo.title %>
               <span class="pull-right">
                 <span class="glyphicon glyphicon-edit"></span>
