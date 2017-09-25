@@ -3,28 +3,40 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //searchbar style
+
 #search-form {
   vertical-align: middle;
   padding-top: 7px;
 }
 
 #search:focus {
-  width: 200%;
+  @media screen and (min-device-width: 1222px) {
+    width: 200%;
+  }
 }
 #search:focus + .input-group-btn {
-  padding-left: 192px;
+  @media screen and (min-device-width: 1222px) {
+    padding-left: 192px;
+  }
 }
 .input-group-btn {
-  -webkit-transition: padding-left 0.4s ease-in-out;
-  transition: padding-left 0.4s ease-in-out;
+  @media screen and (min-device-width: 1222px) {
+    -webkit-transition: padding-left 0.4s ease-in-out;
+    transition: padding-left 0.4s ease-in-out;
+  }
 }
 #search {
   background-color: transparent;
   color: white;
-  width: 200px;
   border: 1px solid white;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
+  @media screen and (min-device-width: 1222px) {
+    width: 200px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  @media screen and (min-device-width: 0px) and (max-device-width: 1221px) {
+    width: 100%;
+  }
 }
 .btn-default {
   background-color: transparent;
@@ -348,4 +360,13 @@ body {font-family: Verdana, sans-serif;}
     margin-left: 0;
     margin-right: 0;
   }
+  .navbar-nav {
+    display: none;
+    visibility: hidden;
+  }
+  a.navbar-brand {
+    display: none;
+    visibility: hidden;
+  }
+
 }
