@@ -53,6 +53,29 @@
       <div class="col col-md-4 col-md-offset-1 calendar">
         <%= yield :calendar %>
       </div>
+      <!-- <div class='col col-xs-10 footer'>
+        <%= yield :footer %>
+      </div> -->
     </div>
   </body>
+  <footer>
+    <div id="mobile-footer">
+      <div class="col-xs-12 navbar-fixed-bottom">
+        <div class="row" id="bottomNav">
+          <% if session[:user_id] %>
+            <div class="col-xs-4 text-center"><a href="/users/<%= session[:user_id] %>/todos"><i class="glyphicon glyphicon-list"></i></a></div>
+            <div class="col-xs-4 text-center"><a href="/users/<%= session[:user_id] %>"><i class="glyphicon glyphicon-user"></i></a></div>
+            <div class="col-xs-4 text-center"><a href="/logout"><i class="glyphicon glyphicon-log-out"></i></a></div>
+          <% else %>
+            <div class="col-xs-4 text-center"><a href="/"><i class="glyphicon glyphicon-circle-arrow-left"></i></a></div>
+            <div class="col-xs-4 text-center"><a href="/users/<%= session[:user_id] %>"><i class="glyphicon glyphicon-circle-arrow-down"></i></a></div>
+            <div class="col-xs-4 text-center"><a href="/login"%>><i class="glyphicon glyphicon-circle-arrow-down"></i></a></div>
+          <% end %>
+          <!-- <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i><br>Link</a></div>
+          <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-down"></i><br>Link</a></div>
+          <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div> -->
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>

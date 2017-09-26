@@ -368,5 +368,31 @@ body {font-family: Verdana, sans-serif;}
     display: none;
     visibility: hidden;
   }
+}
+#mobile-footer {
+  @media screen and (min-device-width: 900px) {
+    visibility: hidden;
+    display: none;
+    vertical-align: middle;
+    text-align: center;
+  }
+}
 
+.navbar-fixed-bottom {
+  @media screen and (min-device-width: 0px) and (max-device-width: 1221px) {
+    height: 50px;
+    background: white;
+    vertical-align: middle;
+
+  }
+}
+#bottomNav {
+  @media screen and (min-device-width: 0px) and (max-device-width: 1221px) {
+    height: inherit;
+  }
+}
+
+i.glyphicon {
+  font-size: 3em;
+  color: #606060;
 }
